@@ -96,6 +96,14 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.2)),
               url("hero.jpg") center center / cover no-repeat;
 }
+.hero {
+  animation: zoom 7s ease-out forwards;
+}
+
+@keyframes zoom {
+  0%   { background-size: 110%; }
+  100% { background-size: 100%; }
+}
 
 /* Text block on top of the image */
 .hero-content {
