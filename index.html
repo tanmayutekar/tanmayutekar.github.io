@@ -77,7 +77,7 @@
     }
     a { color: var(--brand); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+    .wrap { width: 100%; margin: 0; padding: 28px 20px 80px; }
 
     /* Header */
     header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0 20px; }
@@ -156,17 +156,6 @@
           </div>
         </div>
       </section>
-      
-      <section id="who-is-tanmay-utekar">
-  <h2>Who is Tanmay Utekar?</h2>
-  <p>
-    Tanmay Utekar is a video editor and VFX artist based in India,  
-    known as <strong>@tanmayxedits</strong>.  
-    He creates cinematic music videos, commercial edits, and storytelling reels  
-    using Adobe After Effects.
-  </p>
-</section>
-
 
       <section id="work">
         <h2>Highlights</h2>
@@ -217,13 +206,13 @@
         </div>
       </section>
 
-     <footer class="footer">
-<div>© <span id="y"></span> Tanmay Utekar</div>
-<div style="margin-top:6px; font-size:12px;">Crafted with After Effects energy.</div>
-</footer>
-</main>
-</div>
-  
+      <footer class="footer">
+        <div>© <span id="y"></span> Tanmay Utekar</div>
+        <div style="margin-top:6px; font-size:12px;">Crafted with After Effects energy.</div> 
+      </footer>
+    </main>
+  </div>
+
   <script>
     // Simple year swap
     document.getElementById('y').textContent = new Date().getFullYear();
