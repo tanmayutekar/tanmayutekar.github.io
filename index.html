@@ -1,63 +1,221 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tanmay Utekar - Video Editor, VFX Artist & Storyteller. Explore my work and social links." />
-  <meta name="keywords" content="Tanmay Utekar, Video Editor, VFX, CGI, Music Videos, Commercial Edits, India" />
-  <meta name="author" content="Tanmay Utekar" />
-  <meta name="google-site-verification" content="kdMYDN8MVoy_QVXE4MGchk7BeiLDGKHBpV3VShijiMc" />
-  <title>Tanmay Utekar</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Primary SEO -->
+  <title>Who is Tanmay Utekar | Video Editor & VFX Artist</title>
+  <meta name="description" content="Tanmay Utekar is a video editor and VFX artist creating cinematic, storytelling-driven edits for musicians and personal brands under @tanmayxedits." />
+  <link rel="canonical" href="https://tanmayxedits.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Who is Tanmay Utekar | Video Editor & VFX Artist" />
+  <meta property="og:description" content="Video editor and VFX artist for musicians and personal brands. Portfolio, credits, and contact." />
+  <meta property="og:url" content="https://tanmayxedits.com/" />
+  <meta property="og:image" content="https://tanmayxedits.com/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Who is Tanmay Utekar | Video Editor & VFX Artist" />
+  <meta name="twitter:description" content="Video editor and VFX artist for musicians and personal brands. Portfolio, credits, and contact." />
+  <meta name="twitter:image" content="https://tanmayxedits.com/og-image.jpg" />
+
+  <!-- Favicon (replace the hrefs when you add real files) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Structured Data: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tanmay Utekar",
+    "alternateName": "tanmayxedits",
+    "url": "https://tanmayxedits.com/",
+    "image": "https://tanmayxedits.com/og-image.jpg",
+    "jobTitle": "Video Editor & VFX Artist",
+    "description": "Video editor and VFX artist known for cinematic, storytelling-driven edits for musicians and personal brands.",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "tanmayxedits"
+    },
+    "knowsAbout": ["Video Editing", "VFX", "Music Videos", "Personal Branding Videos", "After Effects"],
+    "sameAs": [
+      "https://www.instagram.com/tanmayxedits",
+      "https://www.youtube.com/@tanmayxedits",
+      "https://www.linkedin.com/in/tanmay-utekar" 
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+
   <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0b0b0d;
+      --bg-soft: #121217;
+      --fg: #e9e9ee;
+      --muted: #b3b3bb;
+      --brand: #7c5cff;
+      --card: #14141a;
+      --border: #242433;
+      --accent: #20c997;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
-      margin: 0;
-      padding: 0;
-      background: #111;
-      color: #eee;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: var(--bg); color: var(--fg);
+      line-height: 1.6;
     }
-    img {
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
-    h1 {
-      margin: 10px 0 5px;
-      font-size: 28px;
-    }
-    p {
-      margin: 5px 0 20px;
-      font-size: 15px;
-      max-width: 500px;
-    }
-    a {
-      color: #c9ab3c;
-      text-decoration: none;
-      margin: 0 10px;
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 28px 20px 80px; }
+
+    /* Header */
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center; }
+    .hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.1; margin: 6px 0 12px; }
+    .hero p.lede { font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); margin: 0 0 18px; }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--fg); font-weight: 600; }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), #4ac2ff); border-color: transparent; color: #fff; }
+    .btn.ghost { background: transparent; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+    .grid { display: grid; gap: 16px; }
+
+    .portrait { aspect-ratio: 1/1; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #0e0e12; }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Sections */
+    section { margin-top: 36px; }
+    h2 { font-size: 22px; margin: 0 0 12px; }
+    .list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .pill { border: 1px solid var(--border); padding: 8px 12px; border-radius: 999px; color: var(--muted); font-size: 14px; }
+
+    .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .list { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <img src="photo.jpg" alt="Tanmay Utekar" />
-  <h1>Tanmay Utekar</h1>
-  <p>Video Editor • VFX Artist • CGI • Music & Commercial Edits<br>Based in India</p>
-  <div>
-    <a href="https://www.instagram.com/tanmayxedits/" target="_blank">Instagram</a>
-    <a href="https://bento.me/tanmayutekar" target="_blank">Portfolio</a>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span class="badge">@tanmayxedits</span>
+      </div>
+      <nav class="cta-row">
+        <a class="btn ghost" href="#work">Work</a>
+        <a class="btn ghost" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Tanmay Utekar</h1>
+          <p class="lede">Video editor and VFX artist. I edit <strong>VFX music videos</strong> and <strong>personal branding videos</strong> for clients. I also share edits and experiments on <strong>@tanmayxedits</strong>.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#contact" aria-label="Contact Tanmay">Hire me</a>
+            <a class="btn" href="https://www.instagram.com/tanmayxedits" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn" href="https://www.youtube.com/@tanmayxedits" target="_blank" rel="noopener">YouTube</a>
+          </div>
+          <div style="margin-top:14px; color:var(--muted); font-size:14px;">Also on <a href="https://www.linkedin.com/in/tanmay-utekar" target="_blank" rel="noopener">LinkedIn</a>.</div>
+        </div>
+        <div class="portrait" aria-label="Portrait placeholder">
+          <!-- Replace with your image file path -->
+          <img src="og-image.jpg" alt="Tanmay Utekar - Video Editor and VFX Artist" />
+        </div>
+      </section>
+
+      <section id="about">
+        <h2>About</h2>
+        <div class="card">
+          <p>I help musicians and creators tell sharper stories with clean cuts, tight pacing, and stylish VFX. I work in After Effects and deliver social-ready masters with versioning for reels, shorts, and YouTube uploads.</p>
+          <div class="list" style="margin-top:10px;">
+            <span class="pill">After Effects only</span>
+            <span class="pill">VFX for music videos</span>
+            <span class="pill">Personal branding videos</span>
+            <span class="pill">Story-first editing</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="work">
+        <h2>Highlights</h2>
+        <div class="grid" style="grid-template-columns: repeat(3, minmax(0,1fr));">
+          <a class="card" href="#" aria-label="Sample project 1">
+            <strong>VFX Music Video</strong>
+            <p style="margin:6px 0 0; color:var(--muted);">Glitch comps, clean roto, kinetic type.</p>
+          </a>
+          <a class="card" href="#" aria-label="Sample project 2">
+            <strong>Personal Branding Edit</strong>
+            <p style="margin:6px 0 0; color:var(--muted);">Face-cam pace, captions, light SFX.</p>
+          </a>
+          <a class="card" href="#" aria-label="Sample project 3">
+            <strong>Reel Series</strong>
+            <p style="margin:6px 0 0; color:var(--muted);">Snappy cuts and trend-aware beats.</p>
+          </a>
+        </div>
+      </section>
+
+      <section id="facts">
+        <h2>Quick facts</h2>
+        <div class="grid" style="grid-template-columns: repeat(2, minmax(0,1fr));">
+          <div class="card">
+            <ul style="margin:0; padding-left:18px;">
+              <li><strong>Name:</strong> Tanmay Utekar</li>
+              <li><strong>Handle:</strong> @tanmayxedits</li>
+              <li><strong>Role:</strong> Video Editor / VFX Artist</li>
+              <li><strong>Based in:</strong> India</li>
+            </ul>
+          </div>
+          <div class="card">
+            <ul style="margin:0; padding-left:18px;">
+              <li>Music videos with stylized VFX</li>
+              <li>Personal branding videos for creators</li>
+              <li>Delivery in vertical and horizontal formats</li>
+              <li>Clean, modern look with story focus</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="card">
+          <p>For bookings and collabs:</p>
+          <p><a href="mailto:tanmayutekar@gmail.com">tanmayutekar@gmail.com</a></p>
+          <p>Or DM <a href="https://www.instagram.com/tanmayxedits" target="_blank" rel="noopener">@tanmayxedits</a></p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div>© <span id="y"></span> Tanmay Utekar</div>
+        <div style="margin-top:6px; font-size:12px;">This page is optimized to rank for the query “Who is Tanmay Utekar”.</div>
+      </footer>
+    </main>
   </div>
+
+  <script>
+    // Simple year swap
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
-<title>Tanmay Utekar | Video Editor & Filmmaker</title>
-<meta name="description" content="Tanmay Utekar is a video editor, VFX artist, and filmmaker from India. View portfolio, projects, and contact info.">
-<meta name="keywords" content="Tanmay Utekar, video editor, VFX, filmmaker, tanmayxedits">
-<meta name="author" content="Tanmay Utekar">
-
