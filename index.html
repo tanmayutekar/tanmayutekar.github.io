@@ -85,7 +85,15 @@
     .badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); }
 
     /* Hero */
-    .hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center; min-height: 100vh; }
+    .hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
     .hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.1; margin: 6px 0 12px; }
     .hero p.lede { font-size: clamp(15px, 2.2vw, 18px); color: var(--muted); margin: 0 0 18px; }
     .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
