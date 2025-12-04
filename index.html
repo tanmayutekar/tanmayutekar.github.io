@@ -83,7 +83,65 @@
     header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0 20px; }
     .brand { display: flex; align-items: center; gap: 12px; }
     .badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); }
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 22px;
+}
 
+.work-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 0.28s;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+}
+
+.work-video {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease, filter 0.45s ease;
+  filter: brightness(0.78);
+  background: #000;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.work-card:hover .work-video {
+  transform: scale(1.08);
+  filter: brightness(1);
+}
+
+.work-card p {
+  margin: 12px;
+  padding: 0 6px 18px;
+  color: var(--fg);
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+@media (max-width: 640px) {
+  .work-video { height: 160px; }
+  .work-card { border-radius: 12px; }
+}
+
+/* -------------------------------- */
+/* END OF NEW CSS */
+/* -------------------------------- */
+
+</style>
+  
     /* Hero */
    /* Hero – full-screen landing with background image */
 .hero {
@@ -169,6 +227,56 @@
     }
   </style>
 </head>
+<script>
+/* Hover play on desktop, tap to toggle on touch devices */
+(function(){
+  const videos = Array.from(document.querySelectorAll('.work-video'));
+
+  function isTouchDevice(){
+    return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  }
+
+  if (!videos.length) return;
+
+  if (isTouchDevice()) {
+    // On touch devices: toggle play/pause on tap
+    videos.forEach(video => {
+      video.addEventListener('click', (e) => {
+        if (video.paused) {
+          // stop other videos
+          videos.forEach(v => { if (v !== video) { v.pause(); v.currentTime = 0; }});
+          video.play();
+        } else {
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    });
+  } else {
+    // Desktop: play on hover, pause & reset on leave
+    videos.forEach(video => {
+      const card = video.closest('.work-card');
+      card.addEventListener('mouseenter', () => {
+        // pause others
+        videos.forEach(v => { if (v !== video) { v.pause(); v.currentTime = 0; }});
+        // try to play
+        video.play().catch(()=>{ /* autoplay may block until user interacts */ });
+      });
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+  }
+
+  // Improve UX: stop playback when user switches tab
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      videos.forEach(v => { v.pause(); v.currentTime = 0; });
+    }
+  });
+})();
+</script>
 <body>
   <div class="wrap">
     <header>
@@ -206,23 +314,46 @@
 </section>
 
 
-      <section id="work">
-        <h2>Highlights</h2>
-        <div class="grid" style="grid-template-columns: repeat(3, minmax(0,1fr));">
-          <a class="card" href="#" aria-label="Sample project 1">
-            <strong>VFX Music Video</strong>
-            <p style="margin:6px 0 0; color:var(--muted);">Glitch comps, clean roto, kinetic type.</p>
-          </a>
-          <a class="card" href="#" aria-label="Sample project 2">
-            <strong>Personal Branding Edit</strong>
-            <p style="margin:6px 0 0; color:var(--muted);">Face-cam pace, captions, light SFX.</p>
-          </a>
-          <a class="card" href="#" aria-label="Sample project 3">
-            <strong>Reel Series</strong>
-            <p style="margin:6px 0 0; color:var(--muted);">Snappy cuts and trend-aware beats.</p>
-          </a>
-        </div>
-      </section>
+     <section id="work">
+  <h2>Recent Work</h2>
+
+  <div class="work-grid">
+
+    <!-- Card 1 -->
+    <div class="work-card">
+      <video class="work-video" muted loop playsinline preload="none" poster="thumb1.jpg">
+        <source src="https://drive.google.com/uc?export=download&id=1d-JbkKOMM53_ICV1goCswE1Qr7KDyqpk" type="video/mp4">
+      </video>
+      <p>Recent Project 1</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="work-card">
+      <video class="work-video" muted loop playsinline preload="none" poster="thumb2.jpg">
+        <source src="https://drive.google.com/uc?export=download&id=1pYAm0P8BNrEWipi-yV6NPjMx13i9JQHc" type="video/mp4">
+      </video>
+      <p>Recent Project 2</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="work-card">
+      <video class="work-video" muted loop playsinline preload="none" poster="thumb3.jpg">
+        <source src="https://drive.google.com/uc?export=download&id=1xVimEaV2-qaWL4vfaIDGyd4HIYRKyHo9" type="video/mp4">
+      </video>
+      <p>Recent Project 3</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="work-card">
+      <video class="work-video" muted loop playsinline preload="none" poster="thumb4.jpg">
+        <source src="https://drive.google.com/uc?export=download&id=1DVWnqYOpM0msNSKJEGcIZEq4_nm4gf-t" type="video/mp4">
+      </video>
+      <p>Recent Project 4</p>
+    </div>
+
+  </div>
+</section>
+
 
       <section id="facts">
         <h2>Quick facts</h2>
