@@ -3,305 +3,212 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Tanmay Utekar | Video Editor & VFX Artist</title>
-  <meta name="description" content="Tanmay Utekar is a video editor and VFX artist creating cinematic edits, reels, and VFX-heavy visuals. Known online as @tanmayxedits." />
-
-  <link rel="canonical" href="https://tanmayutekar.github.io/" />
-
-  <!-- OG -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Tanmay Utekar | Video Editor & VFX Artist">
-  <meta property="og:description" content="Cinematic edits, music videos, reels, VFX & CGI work.">
-  <meta property="og:image" content="og-image.jpg">
-
-  <!-- TW -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tanmay Utekar | Video Editor & VFX Artist">
-  <meta name="twitter:description" content="Cinematic edits, music videos, reels, VFX & CGI work.">
-  <meta name="twitter:image" content="og-image.jpg">
+  <meta name="description" content="Tanmay Utekar — cinematic music videos, VFX, reels and personal brand edits. @tanmayxedits" />
 
   <style>
-    :root {
-      --bg: #0b0b0d;
-      --text: #e9e9ee;
-      --muted: #b3b3bb;
-      --card: #14141a;
-      --border: #242433;
-      --brand: #7c5cff;
+    :root{
+      --bg:#0b0b0d; --fg:#e9e9ee; --muted:#b3b3bb;
+      --card:#14141a; --border:#242433; --brand:#7c5cff;
     }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,"Segoe UI",Roboto,Inter,sans-serif;
+      background:var(--bg); color:var(--fg); line-height:1.6;
     }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1280px; margin:0 auto; padding:20px}
 
-    a { color: var(--brand); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    header{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px}
+    .badge{padding:6px 12px; background:var(--card); border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:13px}
 
-    .wrap { padding: 20px 20px 80px; }
-
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .badge {
-      padding: 4px 12px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .btn {
-      padding: 10px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .btn.primary {
-      background: linear-gradient(135deg, var(--brand), #4ac2ff);
-      border-color: transparent;
-      color: white;
-    }
-
-    nav {
-      display: flex;
-      gap: 12px;
-    }
+    .btn{padding:10px 14px; border-radius:10px; background:var(--card); border:1px solid var(--border); color:var(--fg); font-weight:600; text-decoration:none}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#4ac2ff); border-color:transparent; color:#fff}
 
     /* HERO */
     .hero {
       position: relative;
-      min-height: 90vh;
+      min-height: 72vh;
       display: flex;
       align-items: flex-end;
-      padding: 40px 0;
-      background:
-        linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4)),
-        url("hero-frame.jpg") center center / cover no-repeat;
-      border-radius: 12px;
       padding: 40px;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35)),
+        url("hero.jpg") center center / cover no-repeat;
+      border-radius: 12px;
     }
+    .hero-content { max-width:700px; z-index:2; }
+    .hero h1{margin:0 0 10px; font-size:clamp(36px,6vw,60px); letter-spacing:-1px}
+    .lede{color:var(--muted); margin:0 0 14px; font-size:16px}
+    .scroll-hint{color:var(--muted); margin-top:12px; font-size:14px}
 
-    .hero-content {
-      max-width: 600px;
-      backdrop-filter: blur(4px);
-    }
-
-    .hero h1 {
-      margin: 0 0 12px;
-      font-size: clamp(36px, 6vw, 60px);
-      font-weight: 700;
-    }
-
-    .lede {
-      font-size: 18px;
-      margin-bottom: 16px;
-    }
-
-    .scroll-hint {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      animation: float 1.5s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(5px); }
-    }
-
-    /* WORK GRID */
+    /* WORK GRID - 4 in a row on desktop */
+    #work { margin-top:34px; }
     .work-grid {
-      margin-top: 30px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(240px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(4, minmax(220px, 1fr));
+      gap: 18px;
+      align-items: start;
     }
-
-    @media(max-width: 1100px) {
-      .work-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media(max-width: 650px) {
-      .work-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width:1200px) { .work-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width:880px)  { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:520px)  { .work-grid { grid-template-columns: 1fr; } }
 
     .work-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
-      transition: .3s ease;
-      cursor: pointer;
+      transition: transform .28s ease, box-shadow .28s ease;
     }
-
-    .work-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
-    }
+    .work-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 18px 50px rgba(0,0,0,0.6); }
 
     .work-video {
       width: 100%;
-      aspect-ratio: 9 / 16; /* vertical reels */
+      aspect-ratio: 9 / 16;     /* portrait (reels) */
+      max-height: 420px;        /* cap the height so cards fit nicely */
+      height: auto;
       object-fit: cover;
-      filter: brightness(0.75);
-      transition: .4s ease;
-      background: black;
+      display: block;
+      background: #000;
+      filter: brightness(0.82);
+      transition: transform .35s ease, filter .35s ease;
     }
+    .work-card:hover .work-video { transform: scale(1.05); filter: brightness(1); }
 
-    .work-card:hover .work-video {
-      filter: brightness(1);
-      transform: scale(1.06);
-    }
+    .work-card p { text-align:center; padding:12px 10px 18px; margin:0; color:var(--fg); font-size:14px; }
 
-    .work-card p {
-      text-align: center;
-      padding: 12px;
-      font-size: 15px;
-      color: var(--text);
-    }
+    /* Footer / sections */
+    section { margin-top:32px; }
+    h2 { font-size:20px; margin:0 0 12px; }
+    footer { margin-top:40px; padding-top:18px; border-top:1px solid var(--border); color:var(--muted); font-size:14px; }
 
-    /* Footer */
-    footer {
-      margin-top: 50px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 14px;
-    }
+    /* small helper for hidden video state message */
+    .video-fail { color:#ff6b6b; font-size:13px; text-align:center; padding:16px; background:rgba(255,0,0,0.02); }
   </style>
 </head>
-
 <body>
-<div class="wrap">
-
-  <!-- HEADER -->
-  <header>
-    <span class="badge">@tanmayxedits</span>
-    <nav>
-      <a class="btn ghost" href="#work">Work</a>
-      <a class="btn ghost" href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>TANMAY UTEKAR</h1>
-      <p class="lede">
-        I’m a self-taught video editor from Thane. I create cinematic music videos, VFX & CGI shots, and scroll-stopping Reels for creators and artists.
-      </p>
-
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a class="btn primary" href="https://bento.me/tanmayutekar" target="_blank">View my work</a>
-        <a class="btn" href="https://instagram.com/tanmayxedits" target="_blank">Instagram</a>
-        <a class="btn" href="https://youtube.com/@tanmayxedits" target="_blank">YouTube</a>
+  <div class="wrap">
+    <header>
+      <div class="left">
+        <span class="badge">@tanmayxedits</span>
       </div>
+      <nav>
+        <a class="btn" href="#work">Work</a>
+        <a class="btn" href="#contact">Contact</a>
+      </nav>
+    </header>
 
-      <div class="scroll-hint">Scroll to see my edits ↓</div>
-    </div>
-  </section>
+    <main>
+      <section class="hero" aria-label="Hero">
+        <div class="hero-content">
+          <h1>TANMAY UTEKAR</h1>
+          <p class="lede">Self-taught video editor & VFX artist — music videos, VFX, and scroll-stopping reels. Based in India. @tanmayxedits</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px">
+            <a class="btn primary" href="https://bento.me/tanmayutekar" target="_blank" rel="noopener">View my work</a>
+            <a class="btn" href="https://www.instagram.com/tanmayxedits" target="_blank" rel="noopener">Instagram</a>
+          </div>
+          <div class="scroll-hint">Scroll to see my edits ↓</div>
+        </div>
+      </section>
 
-  <!-- WORK -->
-  <section id="work">
-    <h2>Recent Work</h2>
+      <section id="work" aria-label="Recent Work">
+        <h2>Recent Work</h2>
 
-    <div class="work-grid">
+        <div class="work-grid">
+          <!-- Video 1 -->
+          <div class="work-card">
+            <video class="work-video" muted playsinline preload="metadata" loop>
+              <source src="https://drive.google.com/uc?export=download&id=1d-JbkKOMM53_ICV1goCswE1Qr7KDyqpk" type="video/mp4">
+              <!-- fallback text if video can't load -->
+              <div class="video-fail">Video 1 cannot play here — open the file directly in a new tab.</div>
+            </video>
+            <p>Recent Project 1</p>
+          </div>
 
-      <div class="work-card">
-        <video class="work-video" muted loop playsinline preload="metadata">
-          <source src="https://drive.google.com/uc?export=download&id=1d-JbkKOMM53_ICV1goCswE1Qr7KDyqpk" type="video/mp4">
-        </video>
-        <p>Recent Project 1</p>
-      </div>
+          <!-- Video 2 -->
+          <div class="work-card">
+            <video class="work-video" muted playsinline preload="metadata" loop>
+              <source src="https://drive.google.com/uc?export=download&id=1pYAm0P8BNrEWipi-yV6NPjMx13i9JQHc" type="video/mp4">
+              <div class="video-fail">Video 2 cannot play here — open the file directly in a new tab.</div>
+            </video>
+            <p>Recent Project 2</p>
+          </div>
 
-      <div class="work-card">
-        <video class="work-video" muted loop playsinline preload="metadata">
-          <source src="https://drive.google.com/uc?export=download&id=1pYAm0P8BNrEWipi-yV6NPjMx13i9JQHc" type="video/mp4">
-        </video>
-        <p>Recent Project 2</p>
-      </div>
+          <!-- Video 3 -->
+          <div class="work-card">
+            <video class="work-video" muted playsinline preload="metadata" loop>
+              <source src="https://drive.google.com/uc?export=download&id=1xVimEaV2-qaWL4vfaIDGyd4HIYRKyHo9" type="video/mp4">
+              <div class="video-fail">Video 3 cannot play here — open the file directly in a new tab.</div>
+            </video>
+            <p>Recent Project 3</p>
+          </div>
 
-      <div class="work-card">
-        <video class="work-video" muted loop playsinline preload="metadata">
-          <source src="https://drive.google.com/uc?export=download&id=1xVimEaV2-qaWL4vfaIDGyd4HIYRKyHo9" type="video/mp4">
-        </video>
-        <p>Recent Project 3</p>
-      </div>
+          <!-- Video 4 -->
+          <div class="work-card">
+            <video class="work-video" muted playsinline preload="metadata" loop>
+              <source src="https://drive.google.com/uc?export=download&id=1DVWnqYOpM0msNSKJEGcIZEq4_nm4gf-t" type="video/mp4">
+              <div class="video-fail">Video 4 cannot play here — open the file directly in a new tab.</div>
+            </video>
+            <p>Recent Project 4</p>
+          </div>
+        </div>
+      </section>
 
-      <div class="work-card">
-        <video class="work-video" muted loop playsinline preload="metadata">
-          <source src="https://drive.google.com/uc?export=download&id=1DVWnqYOpM0msNSKJEGcIZEq4_nm4gf-t" type="video/mp4">
-        </video>
-        <p>Recent Project 4</p>
-      </div>
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:tanmayutekar@gmail.com">tanmayutekar@gmail.com</a></p>
+      </section>
 
-    </div>
-  </section>
+      <footer>
+        © <span id="y"></span> Tanmay Utekar — Crafted with After Effects energy.
+      </footer>
+    </main>
+  </div>
 
-  <!-- CONTACT -->
-  <section id="contact" style="margin-top:40px;">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:tanmayutekar@gmail.com">tanmayutekar@gmail.com</a></p>
-    <p>Instagram: <a href="https://instagram.com/tanmayxedits">@tanmayxedits</a></p>
-  </section>
+  <script>
+    // set year
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-  <footer>
-    © <span id="y"></span> Tanmay Utekar — Crafted with After Effects energy.
-  </footer>
+    // Hover & tap play logic
+    (function(){
+      const videos = Array.from(document.querySelectorAll('.work-video'));
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-</div>
+      if (!videos.length) return;
 
-<script>
-document.getElementById("y").textContent = new Date().getFullYear();
+      if (isTouch) {
+        videos.forEach(v => {
+          v.addEventListener('click', () => {
+            if (v.paused) {
+              videos.forEach(o => { if (o !== v) { o.pause(); o.currentTime = 0; }});
+              v.play();
+            } else {
+              v.pause();
+              v.currentTime = 0;
+            }
+          });
+        });
+      } else {
+        videos.forEach(v => {
+          const card = v.closest('.work-card');
+          card.addEventListener('mouseenter', () => {
+            videos.forEach(o => { if (o !== v) { o.pause(); o.currentTime = 0; }});
+            v.play().catch(()=>{ /* autoplay might be blocked until a gesture — muted usually ok */ });
+          });
+          card.addEventListener('mouseleave', () => {
+            v.pause();
+            v.currentTime = 0;
+          });
+        });
+      }
 
-/* Hover & Tap Play */
-(function(){
-  const videos = document.querySelectorAll(".work-video");
-  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-  if (isTouch) {
-    videos.forEach(v => {
-      v.addEventListener("click", () => {
-        if (v.paused) {
-          videos.forEach(o => { if(o!==v){o.pause();o.currentTime=0;} });
-          v.play();
-        } else {
-          v.pause();
-          v.currentTime = 0;
-        }
+      // Pause all when user hides the tab
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) videos.forEach(v => { v.pause(); v.currentTime = 0; });
       });
-    });
-  } else {
-    videos.forEach(v => {
-      const card = v.closest(".work-card");
-      card.addEventListener("mouseenter", () => {
-        videos.forEach(o => { if(o!==v){o.pause();o.currentTime=0;} });
-        v.play().catch(()=>{});
-      });
-      card.addEventListener("mouseleave", () => {
-        v.pause();
-        v.currentTime = 0;
-      });
-    });
-  }
-})();
-</script>
-
+    })();
+  </script>
 </body>
 </html>
