@@ -4,398 +4,304 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Primary SEO -->
-  <title>Who is Tanmay Utekar | Video Editor & VFX Artist</title>
-  <meta name="description" content="Tanmay Utekar is a video editor and VFX artist creating cinematic, storytelling-driven edits for musicians and personal brands under @tanmayxedits." />
-  <link rel="canonical" href="https://tanmayxedits.com/" />
+  <title>Tanmay Utekar | Video Editor & VFX Artist</title>
+  <meta name="description" content="Tanmay Utekar is a video editor and VFX artist creating cinematic edits, reels, and VFX-heavy visuals. Known online as @tanmayxedits." />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Who is Tanmay Utekar | Video Editor & VFX Artist" />
-  <meta property="og:description" content="Video editor and VFX artist for musicians and personal brands. Portfolio, credits, and contact." />
-  <meta property="og:url" content="https://tanmayxedits.com/" />
-  <meta property="og:image" content="https://tanmayxedits.com/og-image.jpg" />
+  <link rel="canonical" href="https://tanmayutekar.github.io/" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Who is Tanmay Utekar | Video Editor & VFX Artist" />
-  <meta name="twitter:description" content="Video editor and VFX artist for musicians and personal brands. Portfolio, credits, and contact." />
-  <meta name="twitter:image" content="https://tanmayxedits.com/og-image.jpg" />
+  <!-- OG -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tanmay Utekar | Video Editor & VFX Artist">
+  <meta property="og:description" content="Cinematic edits, music videos, reels, VFX & CGI work.">
+  <meta property="og:image" content="og-image.jpg">
 
-  <!-- Favicon (replace the hrefs when you add real files) -->
-  <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
-
-  <!-- Structured Data: Person -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Tanmay Utekar",
-    "alternateName": "tanmayxedits",
-    "url": "https://tanmayxedits.com/",
-    "image": "https://tanmayxedits.com/og-image.jpg",
-    "jobTitle": "Video Editor & VFX Artist",
-    "description": "Video editor and VFX artist known for cinematic, storytelling-driven edits for musicians and personal brands.",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "tanmayxedits"
-    },
-    "knowsAbout": ["Video Editing", "VFX", "Music Videos", "Personal Branding Videos", "After Effects"],
-    "sameAs": [
-      "https://www.instagram.com/tanmayxedits",
-      "https://www.youtube.com/@tanmayxedits",
-      "https://www.linkedin.com/in/tanmay-utekar" 
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
-    }
-  }
-  </script>
+  <!-- TW -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tanmay Utekar | Video Editor & VFX Artist">
+  <meta name="twitter:description" content="Cinematic edits, music videos, reels, VFX & CGI work.">
+  <meta name="twitter:image" content="og-image.jpg">
 
   <style>
     :root {
-      color-scheme: light dark;
       --bg: #0b0b0d;
-      --bg-soft: #121217;
-      --fg: #e9e9ee;
+      --text: #e9e9ee;
       --muted: #b3b3bb;
-      --brand: #7c5cff;
       --card: #14141a;
       --border: #242433;
-      --accent: #20c997;
+      --brand: #7c5cff;
     }
+
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
+
     body {
-      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      background: var(--bg); color: var(--fg);
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
     }
+
     a { color: var(--brand); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { width: 100%; margin: 0; padding: 28px 20px 80px; }
+
+    .wrap { padding: 20px 20px 80px; }
 
     /* Header */
-    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0 20px; }
-    .brand { display: flex; align-items: center; gap: 12px; }
-    .badge { display: inline-block; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; font-size: 12px; color: var(--muted); }
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  margin-top: 22px;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-.work-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 0.28s;
-  display: flex;
-  flex-direction: column;
-}
+    .badge {
+      padding: 4px 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
-.work-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 18px 50px rgba(0,0,0,0.6);
-}
+    .btn {
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 600;
+    }
 
-.work-video {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.45s ease, filter 0.45s ease;
-  filter: brightness(0.78);
-  background: #000;
-  border-bottom: 1px solid rgba(255,255,255,0.02);
-}
+    .btn.primary {
+      background: linear-gradient(135deg, var(--brand), #4ac2ff);
+      border-color: transparent;
+      color: white;
+    }
 
-.work-card:hover .work-video {
-  transform: scale(1.08);
-  filter: brightness(1);
-}
+    nav {
+      display: flex;
+      gap: 12px;
+    }
 
-.work-card p {
-  margin: 12px;
-  padding: 0 6px 18px;
-  color: var(--fg);
-  font-size: 15px;
-  text-align: center;
-  line-height: 1.2;
-}
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px 0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.4)),
+        url("hero-frame.jpg") center center / cover no-repeat;
+      border-radius: 12px;
+      padding: 40px;
+    }
 
-@media (max-width: 640px) {
-  .work-video { height: 160px; }
-  .work-card { border-radius: 12px; }
-}
+    .hero-content {
+      max-width: 600px;
+      backdrop-filter: blur(4px);
+    }
 
-/* -------------------------------- */
-/* END OF NEW CSS */
-/* -------------------------------- */
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 700;
+    }
 
-</style>
-  
-    /* Hero */
-   /* Hero – full-screen landing with background image */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 40px 5vw;
- background:
-  linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.2)),
-  url("hero.jpg") center center / contain no-repeat,
-  url("hero.jpg") center center / cover no-repeat;
+    .lede {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
 
+    .scroll-hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      animation: float 1.5s ease-in-out infinite;
+    }
 
-/* Text block on top of the image */
-.hero-content {
-  max-width: 650px;
-  backdrop-filter: blur(4px);
-}
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+    }
 
-/* Keep your existing heading and text styles but tweak size */
-.hero h1 {
-  font-size: clamp(34px, 5vw, 56px);
-  line-height: 1.1;
-  margin: 0 0 12px;
-}
+    /* WORK GRID */
+    .work-grid {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(240px, 1fr));
+      gap: 20px;
+    }
 
-.hero p.lede {
-  font-size: clamp(15px, 2.2vw, 18px);
-  color: var(--fg);
-  margin: 0 0 18px;
-}
+    @media(max-width: 1100px) {
+      .work-grid { grid-template-columns: repeat(2, 1fr); }
+    }
 
-.cta-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+    @media(max-width: 650px) {
+      .work-grid { grid-template-columns: 1fr; }
+    }
 
-/* Small scroll hint */
-.scroll-hint {
-  margin-top: 20px;
-  font-size: 13px;
-  color: var(--muted);
-  animation: float 1.6s ease-in-out infinite;
-}
+    .work-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: .3s ease;
+      cursor: pointer;
+    }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(4px); }
-}
+    .work-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    }
 
+    .work-video {
+      width: 100%;
+      aspect-ratio: 9 / 16; /* vertical reels */
+      object-fit: cover;
+      filter: brightness(0.75);
+      transition: .4s ease;
+      background: black;
+    }
 
-.cta-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+    .work-card:hover .work-video {
+      filter: brightness(1);
+      transform: scale(1.06);
+    }
 
+    .work-card p {
+      text-align: center;
+      padding: 12px;
+      font-size: 15px;
+      color: var(--text);
+    }
 
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--fg); font-weight: 600; }
-    .btn.primary { background: linear-gradient(135deg, var(--brand), #4ac2ff); border-color: transparent; color: #fff; }
-    .btn.ghost { background: transparent; }
-
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
-    .grid { display: grid; gap: 16px; }
-
-    .portrait { aspect-ratio: 1/1; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); background: #0e0e12; }
-    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* Sections */
-    section { margin-top: 36px; }
-    h2 { font-size: 22px; margin: 0 0 12px; }
-    .list { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-    .pill { border: 1px solid var(--border); padding: 8px 12px; border-radius: 999px; color: var(--muted); font-size: 14px; }
-
-    .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
-
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .list { grid-template-columns: 1fr; }
+    /* Footer */
+    footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
     }
   </style>
 </head>
+
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <span class="badge">@tanmayxedits</span>
+    <nav>
+      <a class="btn ghost" href="#work">Work</a>
+      <a class="btn ghost" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>TANMAY UTEKAR</h1>
+      <p class="lede">
+        I’m a self-taught video editor from Thane. I create cinematic music videos, VFX & CGI shots, and scroll-stopping Reels for creators and artists.
+      </p>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="btn primary" href="https://bento.me/tanmayutekar" target="_blank">View my work</a>
+        <a class="btn" href="https://instagram.com/tanmayxedits" target="_blank">Instagram</a>
+        <a class="btn" href="https://youtube.com/@tanmayxedits" target="_blank">YouTube</a>
+      </div>
+
+      <div class="scroll-hint">Scroll to see my edits ↓</div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <h2>Recent Work</h2>
+
+    <div class="work-grid">
+
+      <div class="work-card">
+        <video class="work-video" muted loop playsinline preload="metadata">
+          <source src="https://drive.google.com/uc?export=download&id=1d-JbkKOMM53_ICV1goCswE1Qr7KDyqpk" type="video/mp4">
+        </video>
+        <p>Recent Project 1</p>
+      </div>
+
+      <div class="work-card">
+        <video class="work-video" muted loop playsinline preload="metadata">
+          <source src="https://drive.google.com/uc?export=download&id=1pYAm0P8BNrEWipi-yV6NPjMx13i9JQHc" type="video/mp4">
+        </video>
+        <p>Recent Project 2</p>
+      </div>
+
+      <div class="work-card">
+        <video class="work-video" muted loop playsinline preload="metadata">
+          <source src="https://drive.google.com/uc?export=download&id=1xVimEaV2-qaWL4vfaIDGyd4HIYRKyHo9" type="video/mp4">
+        </video>
+        <p>Recent Project 3</p>
+      </div>
+
+      <div class="work-card">
+        <video class="work-video" muted loop playsinline preload="metadata">
+          <source src="https://drive.google.com/uc?export=download&id=1DVWnqYOpM0msNSKJEGcIZEq4_nm4gf-t" type="video/mp4">
+        </video>
+        <p>Recent Project 4</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="margin-top:40px;">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:tanmayutekar@gmail.com">tanmayutekar@gmail.com</a></p>
+    <p>Instagram: <a href="https://instagram.com/tanmayxedits">@tanmayxedits</a></p>
+  </section>
+
+  <footer>
+    © <span id="y"></span> Tanmay Utekar — Crafted with After Effects energy.
+  </footer>
+
+</div>
+
 <script>
-/* Hover play on desktop, tap to toggle on touch devices */
+document.getElementById("y").textContent = new Date().getFullYear();
+
+/* Hover & Tap Play */
 (function(){
-  const videos = Array.from(document.querySelectorAll('.work-video'));
+  const videos = document.querySelectorAll(".work-video");
+  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
-  function isTouchDevice(){
-    return ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-  }
-
-  if (!videos.length) return;
-
-  if (isTouchDevice()) {
-    // On touch devices: toggle play/pause on tap
-    videos.forEach(video => {
-      video.addEventListener('click', (e) => {
-        if (video.paused) {
-          // stop other videos
-          videos.forEach(v => { if (v !== video) { v.pause(); v.currentTime = 0; }});
-          video.play();
+  if (isTouch) {
+    videos.forEach(v => {
+      v.addEventListener("click", () => {
+        if (v.paused) {
+          videos.forEach(o => { if(o!==v){o.pause();o.currentTime=0;} });
+          v.play();
         } else {
-          video.pause();
-          video.currentTime = 0;
+          v.pause();
+          v.currentTime = 0;
         }
       });
     });
   } else {
-    // Desktop: play on hover, pause & reset on leave
-    videos.forEach(video => {
-      const card = video.closest('.work-card');
-      card.addEventListener('mouseenter', () => {
-        // pause others
-        videos.forEach(v => { if (v !== video) { v.pause(); v.currentTime = 0; }});
-        // try to play
-        video.play().catch(()=>{ /* autoplay may block until user interacts */ });
+    videos.forEach(v => {
+      const card = v.closest(".work-card");
+      card.addEventListener("mouseenter", () => {
+        videos.forEach(o => { if(o!==v){o.pause();o.currentTime=0;} });
+        v.play().catch(()=>{});
       });
-      card.addEventListener('mouseleave', () => {
-        video.pause();
-        video.currentTime = 0;
+      card.addEventListener("mouseleave", () => {
+        v.pause();
+        v.currentTime = 0;
       });
     });
   }
-
-  // Improve UX: stop playback when user switches tab
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      videos.forEach(v => { v.pause(); v.currentTime = 0; });
-    }
-  });
 })();
 </script>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
-        <span class="badge">@tanmayxedits</span>
-      </div>
-      <nav class="cta-row">
-        <a class="btn ghost" href="#work">Work</a>
-        <a class="btn ghost" href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <main>
-      <section class="hero">
-  <div class="hero-content">
-    <h1>TANMAY UTEKAR</h1>
-    <p class="lede">
-      I’m Tanmay Utekar, a self-taught video editor based in Thane.
-      I work on music videos, VFX & CGI projects, commercial edits, and scroll-stopping Reels.
-      Skilled in After Effects, I bring ideas to life with bold visuals and sharp storytelling.
-    </p>
-
-    <div class="cta-row">
-      <a class="btn primary" href="https://bento.me/tanmayutekar" target="_blank" rel="noopener">View my work</a>
-      <a class="btn" href="https://www.instagram.com/tanmayxedits" target="_blank" rel="noopener">Instagram</a>
-      <a class="btn" href="https://youtu.be/-u0sdh4L9esvq=hd1080">YouTube</a>
-    </div>
-
-    <div style="margin-top:14px; color:var(--muted); font-size:14px;">
-      Also on <a href="https://www.linkedin.com/in/tanmay-utekar" target="_blank" rel="noopener">LinkedIn</a>.
-    </div>
-
-    <div class="scroll-hint">Scroll to see my edits ↓</div>
-  </div>
-</section>
-
-
-     <section id="work">
-  <h2>Recent Work</h2>
-
-  <div class="work-grid">
-
-    <!-- Card 1 -->
-    <div class="work-card">
-      <video class="work-video" muted loop playsinline preload="none" poster="thumb1.jpg">
-        <source src="https://drive.google.com/uc?export=download&id=1d-JbkKOMM53_ICV1goCswE1Qr7KDyqpk" type="video/mp4">
-      </video>
-      <p>Recent Project 1</p>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="work-card">
-      <video class="work-video" muted loop playsinline preload="none" poster="thumb2.jpg">
-        <source src="https://drive.google.com/uc?export=download&id=1pYAm0P8BNrEWipi-yV6NPjMx13i9JQHc" type="video/mp4">
-      </video>
-      <p>Recent Project 2</p>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="work-card">
-      <video class="work-video" muted loop playsinline preload="none" poster="thumb3.jpg">
-        <source src="https://drive.google.com/uc?export=download&id=1xVimEaV2-qaWL4vfaIDGyd4HIYRKyHo9" type="video/mp4">
-      </video>
-      <p>Recent Project 3</p>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="work-card">
-      <video class="work-video" muted loop playsinline preload="none" poster="thumb4.jpg">
-        <source src="https://drive.google.com/uc?export=download&id=1DVWnqYOpM0msNSKJEGcIZEq4_nm4gf-t" type="video/mp4">
-      </video>
-      <p>Recent Project 4</p>
-    </div>
-
-  </div>
-</section>
-
-
-      <section id="facts">
-        <h2>Quick facts</h2>
-        <div class="grid" style="grid-template-columns: repeat(2, minmax(0,1fr));">
-          <div class="card">
-            <ul style="margin:0; padding-left:18px;">
-              <li><strong>Name:</strong> Tanmay Utekar</li>
-              <li><strong>Handle:</strong> @tanmayxedits</li>
-              <li><strong>Role:</strong> Video Editor / VFX Artist</li>
-              <li><strong>Based in:</strong> India</li>
-            </ul>
-          </div>
-          <div class="card">
-            <ul style="margin:0; padding-left:18px;">
-              <li>Music videos with stylized VFX</li>
-              <li>Personal branding videos for creators</li>
-              <li>Delivery in vertical and horizontal formats</li>
-              <li>Clean, modern look with story focus</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact">
-        <h2>Contact</h2>
-        <div class="card">
-          <p>For bookings and collabs:</p>
-          <p><a href="mailto:tanmayutekar@gmail.com">tanmayutekar@gmail.com</a></p>
-          <p>Or DM <a href="https://www.instagram.com/tanmayxedits" target="_blank" rel="noopener">@tanmayxedits</a></p>
-        </div>
-      </section>
-
-      <footer class="footer">
-        <div>© <span id="y"></span> Tanmay Utekar</div>
-        <div style="margin-top:6px; font-size:12px;">Crafted with After Effects energy.</div> 
-      </footer>
-    </main>
-  </div>
-
-  <script>
-    // Simple year swap
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
