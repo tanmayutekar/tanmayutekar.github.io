@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Services — tanmayxedits</title>
+<style>
+/* ═══════════════════════════════════════════
+   tanmayxedits — shared.css
+   Used across all pages
+═══════════════════════════════════════════ */
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--black:#000;--white:#fff;--gray:#6e6e73;--accent:#0071e3}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+
+/* ── CURSOR ── */
+*{cursor:none!important}
+.cursor-head{
+  width:14px;height:14px;background:#fff;border-radius:50%;
+  position:fixed;pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 10px #fff,0 0 24px rgba(255,255,255,.7),0 0 40px rgba(180,160,255,.4);
+  transition:width .15s cubic-bezier(.22,1,.36,1),height .15s cubic-bezier(.22,1,.36,1),border-radius .15s;
+  will-change:transform;
+}
+.cursor-head.on-hover{
+  width:48px;height:48px;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.7);
+  box-shadow:0 0 20px rgba(120,100,255,.6);
+}
+.comet-dot{
+  position:fixed;pointer-events:none;border-radius:50%;
+  transform:translate(-50%,-50%);z-index:9998;will-change:transform;
+}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);background:rgba(0,0,0,.72);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:18px;font-weight:700;letter-spacing:-.5px;color:#fff;text-decoration:none}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:rgba(255,255,255,.7);text-decoration:none;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nav-links a.active{color:#fff}
+.nav-cta{background:var(--accent);color:#fff;font-size:13px;font-weight:500;padding:8px 18px;border-radius:20px;text-decoration:none;transition:all .2s;box-shadow:0 0 20px rgba(0,113,227,.3)}
+.nav-cta:hover{opacity:.85}
+@media(max-width:600px){.nav-links{display:none}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-right.visible{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(30px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.stagger.visible>*:nth-child(1){opacity:1;transform:none;transition-delay:.05s}
+.stagger.visible>*:nth-child(2){opacity:1;transform:none;transition-delay:.15s}
+.stagger.visible>*:nth-child(3){opacity:1;transform:none;transition-delay:.25s}
+.stagger.visible>*:nth-child(4){opacity:1;transform:none;transition-delay:.35s}
+.stagger.visible>*:nth-child(5){opacity:1;transform:none;transition-delay:.45s}
+.stagger.visible>*:nth-child(6){opacity:1;transform:none;transition-delay:.55s}
+
+/* ── SHARED SECTION STYLES ── */
+section{padding:100px 24px}
+.section-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-header{text-align:center;margin-bottom:72px}
+h2{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-1.5px;line-height:1.08}
+.section-sub{font-size:17px;color:var(--gray);margin-top:14px;max-width:560px;margin-left:auto;margin-right:auto}
+
+/* ── BUTTONS ── */
+.btn-primary{background:var(--accent);color:#fff;padding:15px 30px;border-radius:30px;font-size:16px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 0 30px rgba(0,113,227,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(0,113,227,.5)}
+.btn-secondary{background:rgba(255,255,255,.08);color:#fff;padding:15px 30px;border-radius:30px;font-size:16px;font-weight:500;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:all .3s}
+.btn-secondary:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+
+/* ── PAGE HERO (non-home) ── */
+.page-hero{
+  min-height:52vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:120px 24px 72px;
+  position:relative;overflow:hidden;
+  background:#000;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 70% at 50% 100%,rgba(0,60,160,.14),transparent 65%);
+}
+.page-hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:1;}
+.page-hero-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.page-hero h1{font-size:clamp(48px,7vw,88px);font-weight:800;letter-spacing:-3px;line-height:1.02}
+.page-hero h1 .gradient-text{background:linear-gradient(135deg,#fff 40%,rgba(255,255,255,.35));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-hero-sub{font-size:18px;color:rgba(255,255,255,.4);margin-top:20px;max-width:520px;line-height:1.6}
+/* animated grid bg */
+.page-hero-grid{
+  position:absolute;inset:0;pointer-events:none;opacity:.03;
+  background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+
+/* ── ADOBE TOOL PARTICLES ── */
+.tool-particle{
+  position:fixed;pointer-events:none;z-index:9990;border-radius:50%;
+  animation:toolExplode var(--pd,.8s) ease-out forwards;
+}
+@keyframes toolExplode{
+  0%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:translate(var(--px,40px),var(--py,-60px)) scale(0)}
+}
+
+/* ── INTRO LOADER ── */
+#loader{position:fixed;inset:0;z-index:99999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
+#loader-num{font-size:clamp(80px,15vw,160px);font-weight:900;letter-spacing:-6px;color:#fff;line-height:1;}
+#loader-bar-wrap{width:200px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+#loader-bar{height:100%;width:0%;background:#fff;border-radius:2px;box-shadow:0 0 12px #fff,0 0 24px rgba(255,255,255,.5);}
+#loader-label{font-size:11px;letter-spacing:4px;color:rgba(255,255,255,.3);text-transform:uppercase;}
+#loader-flash{position:fixed;inset:0;z-index:99998;background:#fff;opacity:0;pointer-events:none;transition:opacity .08s;}
+
+/* ── CTA STRIP ── */
+.cta-strip{position:relative;padding:130px 24px;text-align:center;overflow:hidden;background:#000;}
+.cta-strip::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(0,90,200,.22) 0%,transparent 65%);animation:ctaOrb 6s ease-in-out infinite;pointer-events:none;}
+.cta-strip::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;top:30%;left:20%;background:radial-gradient(circle,rgba(100,0,220,.12) 0%,transparent 65%);animation:ctaOrb2 8s ease-in-out infinite;pointer-events:none;}
+@keyframes ctaOrb{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.2)}}
+@keyframes ctaOrb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-30px) scale(1.15)}}
+.cta-strip-inner{position:relative;z-index:1;}
+.cta-overline{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:24px;}
+.cta-strip h2{font-size:clamp(40px,6vw,80px);font-weight:800;letter-spacing:-3px;line-height:1.05;margin-bottom:20px;background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.cta-strip p{font-size:18px;color:rgba(255,255,255,.45);margin-bottom:44px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-primary{padding:16px 40px;border-radius:50px;background:linear-gradient(90deg,#0055cc,#0071e3);color:#fff;font-size:16px;font-weight:600;text-decoration:none;box-shadow:0 4px 30px rgba(0,113,227,.45);transition:box-shadow .3s,transform .3s;}
+.cta-btn-primary:hover{box-shadow:0 8px 50px rgba(0,113,227,.7);transform:translateY(-2px)}
+.cta-btn-ghost{padding:16px 40px;border-radius:50px;border:1px solid rgba(255,255,255,.18);color:#fff;font-size:16px;font-weight:600;text-decoration:none;transition:border-color .3s,background .3s,transform .3s;}
+.cta-btn-ghost:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.cta-grid{position:absolute;inset:0;pointer-events:none;opacity:.04;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:60px 60px;}
+
+/* ── FOOTER ── */
+footer{background:#000;position:relative;overflow:hidden;}
+.footer-glow{position:absolute;width:600px;height:300px;border-radius:50%;top:0;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,60,160,.12),transparent 70%);pointer-events:none;}
+.footer-name-banner{text-align:center;padding:70px 24px 0;position:relative;z-index:1;font-size:clamp(60px,12vw,160px);font-weight:900;letter-spacing:-6px;line-height:1;background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.02) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;user-select:none;}
+.footer-divider{height:1px;background:rgba(255,255,255,.07);margin:0 24px;}
+.footer-inner{max-width:1100px;margin:0 auto;padding:52px 24px 32px;position:relative;z-index:1;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:48px}
+.footer-brand .logo{font-size:22px;display:block;margin-bottom:12px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.3);max-width:240px;line-height:1.7}
+.footer-socials{display:flex;gap:12px;margin-top:20px;}
+.footer-social-btn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:14px;text-decoration:none;transition:border-color .25s,color .25s,background .25s,transform .25s;}
+.footer-social-btn:hover{border-color:rgba(255,255,255,.4);color:#fff;background:rgba(255,255,255,.07);transform:translateY(-3px);}
+.footer-col h4{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:18px}
+.footer-col a{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:12px;transition:color .2s,gap .2s;}
+.footer-col a::before{content:'→';font-size:11px;opacity:0;transform:translateX(-6px);transition:opacity .2s,transform .2s;}
+.footer-col a:hover{color:#fff;gap:10px;}
+.footer-col a:hover::before{opacity:1;transform:translateX(0);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.18)}
+.footer-made{font-size:12px;color:rgba(255,255,255,.18)}
+.footer-made span{color:rgba(255,255,255,.4)}
+@media(max-width:600px){.footer-top{flex-direction:column}}
+
+
+/* ── SERVICES PAGE ── */
+.svc-hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 60px 80px;
+  position:relative;overflow:hidden;background:#000;
+}
+.svc-hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 55% at 80% 40%, rgba(114,9,183,.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 60%, rgba(0,50,160,.1) 0%, transparent 55%);
+}
+.svc-hero-label{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:28px;display:flex;align-items:center;gap:12px;}
+.svc-hero-label::before{content:'';width:32px;height:1px;background:var(--accent);}
+.svc-hero h1{font-size:clamp(64px,9vw,130px);font-weight:900;letter-spacing:-5px;line-height:.95;margin-bottom:40px;}
+.svc-hero h1 em{font-style:normal;-webkit-text-stroke:1px rgba(255,255,255,.3);-webkit-text-fill-color:transparent;}
+.svc-hero-sub{font-size:18px;color:rgba(255,255,255,.4);max-width:500px;line-height:1.6;}
+
+/* process strip */
+.process-strip{
+  display:flex;overflow-x:auto;
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.process-strip::-webkit-scrollbar{display:none}
+.process-step{
+  flex:1;min-width:200px;padding:40px 36px;
+  border-right:1px solid rgba(255,255,255,.06);
+  position:relative;transition:background .3s;
+}
+.process-step:last-child{border-right:none}
+.process-step:hover{background:rgba(255,255,255,.03)}
+.process-num{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:16px;font-family:monospace;}
+.process-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px;}
+.process-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.6;}
+
+/* services list */
+.svc-list{max-width:1100px;margin:0 auto;}
+.svc-item{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  padding:80px 0;border-bottom:1px solid rgba(255,255,255,.06);
+  align-items:center;
+}
+.svc-item:last-child{border-bottom:none}
+.svc-item.reverse{direction:rtl;}
+.svc-item.reverse>*{direction:ltr;}
+.svc-item-visual{
+  aspect-ratio:4/3;border-radius:20px;overflow:hidden;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  font-size:100px;
+}
+.svc-item-visual::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(0,0,0,.4));
+}
+.svc-item-num{font-size:11px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,.2);margin-bottom:16px;font-family:monospace;}
+.svc-item-name{font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-1.5px;color:#fff;margin-bottom:16px;line-height:1.1;}
+.svc-item-desc{font-size:15px;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:28px;}
+.svc-item-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.svc-item-tag{font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);}
+.svc-item-price{font-size:13px;color:rgba(255,255,255,.3);}
+.svc-item-price strong{color:#fff;font-size:18px;}
+
+@media(max-width:900px){
+  .svc-hero{padding:0 32px 60px;}
+  .svc-item{grid-template-columns:1fr;gap:40px;}
+  .svc-item.reverse{direction:ltr;}
+  .svc-list{padding:0 32px;}
+  .process-step{min-width:180px;padding:28px 24px;}
+}
+@media(max-width:600px){
+  .svc-hero{padding:0 20px 48px;}
+  .svc-list{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader"><div id="loader-num">0</div><div id="loader-bar-wrap"><div id="loader-bar"></div></div><div id="loader-label">tanmayxedits</div></div>
+<div id="loader-flash"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">tanmayx<span>edits</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start a Project</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="svc-hero">
+  <div class="svc-hero-bg"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="svc-hero-label reveal">What We Do</div>
+    <h1 class="reveal">Our<br><em>Services.</em></h1>
+    <p class="svc-hero-sub reveal">End-to-end content creation — from a single reel to a full brand overhaul. We do it all.</p>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="process-strip reveal">
+  <div class="process-step"><div class="process-num">01</div><div class="process-title">Brief</div><div class="process-desc">We understand your brand, audience and goals.</div></div>
+  <div class="process-step"><div class="process-num">02</div><div class="process-title">Strategy</div><div class="process-desc">We plan content that's built to perform.</div></div>
+  <div class="process-step"><div class="process-num">03</div><div class="process-title">Create</div><div class="process-desc">We shoot, edit and animate with precision.</div></div>
+  <div class="process-step"><div class="process-num">04</div><div class="process-title">Review</div><div class="process-desc">You give feedback. We refine until it's perfect.</div></div>
+  <div class="process-step"><div class="process-num">05</div><div class="process-title">Deliver</div><div class="process-desc">Files delivered. Posted. Watched. Shared.</div></div>
+</div>
+
+<!-- SERVICES LIST -->
+<section style="padding:80px 60px;">
+  <div class="svc-list">
+
+    <div class="svc-item reveal">
+      <!-- OFFER BANNER -->
+      <div style="grid-column:1/-1;background:linear-gradient(90deg,rgba(0,113,227,.12),rgba(114,9,183,.1));border:1px solid rgba(0,113,227,.25);border-radius:16px;padding:14px 24px;margin-bottom:-20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span style="font-size:20px;">🎁</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:-.2px;">Buy 3+ Reels & Get Reel Covers Absolutely Free</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;">Thumbnail covers designed for each reel — worth ₹500 each, yours at no cost.</div>
+          </div>
+        </div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);white-space:nowrap;">Limited Offer ✦</div>
+      </div>
+      <div>
+        <div class="svc-item-num">01</div>
+        <div class="svc-item-name">Reel Editing</div>
+        <div class="svc-item-desc">Cinematic, high-retention reels built to hook viewers in the first second. Beat-synced, colour-graded, ready to go viral.</div>
+        <div class="svc-item-tags"><span class="svc-item-tag">Music Video</span><span class="svc-item-tag">Talking Head</span><span class="svc-item-tag">Beat Sync</span><span class="svc-item-tag">Color Grade</span><span class="svc-item-tag">Transitions</span><span class="svc-item-tag">Motion Graphics</span><span class="svc-item-tag">VFX</span></div>
+        <div class="svc-item-price">Starting at <strong>₹2,000</strong> / reel</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.25);margin-top:8px;line-height:1.6;">* Basic reel editing charges may vary according to the requirements and complexity of the project.</div>
+      </div>
+      <div class="svc-item-visual" style="background:linear-gradient(160deg,#0d0221,#240046,#5a189a)">🎬</div>
+    </div>
+
+    <div class="svc-item reverse reveal">
+      <div>
+        <div class="svc-item-num">02</div>
+        <div class="svc-item-name">Event Reel Shooting</div>
+        <div class="svc-item-desc">We don't just edit — we show up. Tanmay personally attends your event, captures every high-energy moment on camera, and delivers a cinematic reel that makes people feel like they missed out. From weddings to product launches, if it's worth remembering, we'll make sure everyone sees it.</div>
+        <div class="svc-item-tags">
+          <span class="svc-item-tag">Weddings</span>
+          <span class="svc-item-tag">Birthday Parties</span>
+          <span class="svc-item-tag">Corporate Events</span>
+          <span class="svc-item-tag">Product Launches</span>
+          <span class="svc-item-tag">Brand Activations</span>
+          <span class="svc-item-tag">College Fests</span>
+          <span class="svc-item-tag">Award Nights</span>
+          <span class="svc-item-tag">Concerts & Gigs</span>
+          <span class="svc-item-tag">Sports Events</span>
+          <span class="svc-item-tag">Store Openings</span>
+        </div>
+        <div class="svc-item-price">Starting at <strong>₹2,000</strong> / event</div>
+      </div>
+      <div class="svc-item-visual" style="background:linear-gradient(160deg,#1a0533,#4a0a6e,#7b2ff7)">🎥</div>
+    </div>
+
+
+
+    <div class="svc-item reverse reveal">
+      <div>
+        <div class="svc-item-num">03</div>
+        <div class="svc-item-name">Carousel Design</div>
+        <div class="svc-item-desc">Scroll-stopping swipeable carousels that educate, engage and convert. Designed to get saved, shared and drive profile visits.</div>
+        <div class="svc-item-tags"><span class="svc-item-tag">Educational</span><span class="svc-item-tag">Brand Tips</span><span class="svc-item-tag">Product</span><span class="svc-item-tag">Infographics</span></div>
+        <div class="svc-item-price">Starting at <strong>₹600</strong> / carousel</div>
+      </div>
+      <div class="svc-item-visual" style="background:linear-gradient(160deg,#012a4a,#013a63,#0466c8)">🎨</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div>
+        <div class="svc-item-num">04</div>
+        <div class="svc-item-name">Photography</div>
+        <div class="svc-item-desc">High-end photography for products, events and editorial campaigns. Every shot tells a story that your audience wants to be part of.</div>
+        <div class="svc-item-tags"><span class="svc-item-tag">Commercial</span><span class="svc-item-tag">Lifestyle</span><span class="svc-item-tag">Events</span><span class="svc-item-tag">Retouching</span></div>
+        <div class="svc-item-price">Starting at <strong>₹3,000</strong> / shoot</div>
+      </div>
+      <div class="svc-item-visual" style="background:linear-gradient(160deg,#1b1b1b,#2d2d2d,#3d3d3d)">📷</div>
+    </div>
+
+    <div class="svc-item reverse reveal">
+      <div>
+        <div class="svc-item-num">05</div>
+        <div class="svc-item-name">Social Media Management</div>
+        <div class="svc-item-desc">We take over your entire content calendar — planning, creating, posting and engaging. You focus on the business, we handle the feed.</div>
+        <div class="svc-item-tags"><span class="svc-item-tag">Content Planning</span><span class="svc-item-tag">Copywriting</span><span class="svc-item-tag">Scheduling</span><span class="svc-item-tag">Engagement</span></div>
+        <div class="svc-item-price">Starting at <strong>₹12,000</strong> / month</div>
+      </div>
+      <div class="svc-item-visual" style="background:linear-gradient(160deg,#2b1d0e,#582f0e,#7f4f24)">📱</div>
+    </div>
+
+    <div class="svc-item reveal">
+      <div>
+        <div class="svc-item-num">06</div>
+        <div class="svc-item-name">Digital Marketing</div>
+        <div class="svc-item-desc">Paid and organic strategies that turn your content into real revenue. Meta ads, Google ads, SEO — we manage the full funnel.</div>
+        <div class="svc-item-tags"><span class="svc-item-tag">Meta Ads</span><span class="svc-item-tag">Google Ads</span><span class="svc-item-tag">SEO</span><span class="svc-item-tag">Analytics</span></div>
+        <div class="svc-item-price">Starting at <strong>₹15,000</strong> / month</div>
+      </div>
+      <div class="svc-item-visual" style="background:linear-gradient(160deg,#0a3622,#155d27,#1a7431)">📈</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip reveal">
+  <div class="cta-grid"></div>
+  <div class="cta-strip-inner">
+    <div class="cta-overline">Let's get to work</div>
+    <h2>Find your<br>perfect plan.</h2>
+    <p>Not sure which service fits? Let's have a quick call and figure it out together.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="cta-btn-primary">Get in Touch →</a>
+      <a href="portfolio.html" class="cta-btn-ghost">See Our Work</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-glow"></div>
+  <div class="footer-name-banner">tanmayxedits</div>
+  <div class="footer-divider"></div>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">tanmayx<span>edits</span></a>
+        <p>Content creation studio specialising in reels, motion graphics and social media growth.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-btn">📸</a>
+          <a href="#" class="footer-social-btn">▶</a>
+          <a href="#" class="footer-social-btn">💬</a>
+          <a href="#" class="footer-social-btn" style="font-size:12px;font-weight:700;">in</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Pages</h4><a href="portfolio.html">Portfolio</a><a href="services.html">Services</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div class="footer-col"><h4>Services</h4><a href="services.html">Reel Editing</a><a href="services.html">Motion Graphics</a><a href="services.html">Carousel Design</a><a href="services.html">Event Reel Shooting</a><a href="services.html">Digital Marketing</a></div>
+      <div class="footer-col"><h4>Contact</h4><a href="#">Instagram DM</a><a href="#">WhatsApp</a><a href="contact.html">Email Us</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Tanmay Utekar · tanmayxedits. All rights reserved.</span>
+      <span class="footer-made">Made with <span>✦</span> in India</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cursor-head" id="cursorHead"></div>
+<script>/* ═══════════════════════════════════════════
+   tanmayxedits — shared.js
+   Used across all pages
+═══════════════════════════════════════════ */
+
+// ── INTRO LOADER ──
+(function(){
+  const loader = document.getElementById('loader');
+  const num    = document.getElementById('loader-num');
+  const bar    = document.getElementById('loader-bar');
+  const flash  = document.getElementById('loader-flash');
+  if(!loader||!num||!bar||!flash) return;
+
+  document.body.style.overflow = 'hidden';
+  let count = 0;
+  const duration = 1400;
+  const start = performance.now();
+
+  function tick(now){
+    const p = Math.min((now - start) / duration, 1);
+    const eased = Math.pow(p, 1.6);
+    count = Math.floor(eased * 100);
+    num.textContent = count;
+    bar.style.width = count + '%';
+    const glow = Math.floor(eased * 255);
+    num.style.textShadow = `0 0 ${40*eased}px rgba(${glow},${glow},255,${eased*.9})`;
+    if(p < 1){ requestAnimationFrame(tick); return; }
+
+    num.textContent = '100';
+    bar.style.width = '100%';
+    num.style.transition = 'transform .15s cubic-bezier(.2,0,.0,1)';
+    num.style.transform = 'scale(1.4)';
+    num.style.textShadow = '0 0 80px #fff, 0 0 160px rgba(200,200,255,.8)';
+
+    setTimeout(() => {
+      flash.style.opacity = '1';
+      setTimeout(() => {
+        flash.style.opacity = '0';
+        flash.style.transition = 'opacity .35s ease';
+      }, 80);
+      loader.style.transition = 'transform .55s cubic-bezier(.7,0,.3,1), opacity .4s ease';
+      loader.style.transform = 'translateY(-100%)';
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 600);
+    }, 160);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// ── CURSOR: Jelly Blob + Comet Tail + Elastic ──
+document.addEventListener('DOMContentLoaded', function(){
+(function(){
+  const head = document.getElementById('cursorHead');
+  if(!head) return;
+  const TRAIL = 22;
+  const dots  = [];
+  const colours = [
+    'rgba(255,255,255,.95)','rgba(210,220,255,.88)','rgba(160,180,255,.78)',
+    'rgba(110,140,255,.66)','rgba(80,110,240,.54)','rgba(70,80,220,.43)',
+    'rgba(90,60,200,.33)','rgba(110,40,180,.24)','rgba(120,20,160,.16)',
+    'rgba(125,10,150,.10)','rgba(125,10,145,.06)','rgba(125,10,140,.03)',
+    'rgba(120,10,135,.01)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)',
+    'rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)','rgba(0,0,0,0)',
+    'rgba(0,0,0,0)','rgba(0,0,0,0)',
+  ];
+  const sizes = Array.from({length:TRAIL},(_,i)=>Math.max(1.5, 8*(1-i/TRAIL)));
+
+  for(let i = 0; i < TRAIL; i++){
+    const d = document.createElement('div');
+    d.className = 'comet-dot';
+    d.style.cssText = `width:${sizes[i]}px;height:${sizes[i]}px;background:${colours[i]};`;
+    document.body.appendChild(d);
+    dots.push({ el:d, x:0, y:0 });
+  }
+
+  let tx=0, ty=0, hx=0, hy=0, vx=0, vy=0;
+  let prevX=0, prevY=0, speedX=0, speedY=0;
+
+  document.addEventListener('mousemove', e => { tx=e.clientX; ty=e.clientY; });
+
+  document.addEventListener('mouseover', e => {
+    const t = e.target;
+    if(t.matches('a,a *,button,button *,[role=button],.card,.svc-card,.stat-card,.price-card,.testi-card,.port-item,.work-item'))
+      head.classList.add('on-hover');
+    else head.classList.remove('on-hover');
+  });
+
+  document.addEventListener('mousedown', () => { head.style.transform='translate(-50%,-50%) scale(.7)'; });
+  document.addEventListener('mouseup',   () => { head.style.transform='translate(-50%,-50%) scale(1)'; });
+  document.addEventListener('mouseleave',() => { head.style.opacity='0'; dots.forEach(d=>d.el.style.opacity='0'); });
+  document.addEventListener('mouseenter',() => { head.style.opacity='1'; dots.forEach(d=>d.el.style.opacity='1'); });
+
+  (function animate(){
+    const stiffness=0.18, damping=0.72;
+    vx += (tx-hx)*stiffness; vx *= damping;
+    vy += (ty-hy)*stiffness; vy *= damping;
+    hx += vx; hy += vy;
+
+    speedX = tx-prevX; speedY = ty-prevY;
+    prevX=tx; prevY=ty;
+    const speed = Math.sqrt(speedX*speedX+speedY*speedY);
+    const stretch = Math.min(1+speed*0.04, 2.2);
+    const squish  = Math.max(1/stretch, 0.5);
+    const angle   = Math.atan2(speedY, speedX)*180/Math.PI;
+
+    if(!head.classList.contains('on-hover')){
+      head.style.transform=`translate(-50%,-50%) rotate(${angle}deg) scaleX(${stretch}) scaleY(${squish})`;
+    }
+    head.style.left = hx+'px';
+    head.style.top  = hy+'px';
+
+    // trail
+    dots[0].x += (hx - dots[0].x)*0.6;
+    dots[0].y += (hy - dots[0].y)*0.6;
+    for(let i=1;i<TRAIL;i++){
+      dots[i].x += (dots[i-1].x - dots[i].x)*0.55;
+      dots[i].y += (dots[i-1].y - dots[i].y)*0.55;
+      dots[i].el.style.left = dots[i].x+'px';
+      dots[i].el.style.top  = dots[i].y+'px';
+    }
+    dots[0].el.style.left = dots[0].x+'px';
+    dots[0].el.style.top  = dots[0].y+'px';
+    requestAnimationFrame(animate);
+  })();
+})();
+});
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, {threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach(el => revealObs.observe(el));
+
+// ── GRAIN FILM OVERLAY ──
+(function(){
+  const canvas = document.createElement('canvas');
+  canvas.id = 'grainCanvas';
+  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.032;mix-blend-mode:screen;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let w, h, frame = 0;
+  function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  function grain(){
+    frame++;
+    if(frame % 2 === 0){
+      const img = ctx.createImageData(w, h);
+      const d = img.data;
+      for(let i=0;i<d.length;i+=4){
+        const v = (Math.random()*255)|0;
+        d[i]=d[i+1]=d[i+2]=v; d[i+3]=255;
+      }
+      ctx.putImageData(img,0,0);
+    }
+    requestAnimationFrame(grain);
+  }
+  grain();
+})();
+
+// ── 3D TILT ──
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.svc-card,.stat-card,.price-card,.testi-card,.work-card').forEach(card => {
+    card.style.transformStyle = 'preserve-3d';
+    card.style.willChange = 'transform';
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX-r.left)/r.width - 0.5;
+      const y = (e.clientY-r.top)/r.height - 0.5;
+      card.style.transition = 'transform .05s ease';
+      card.style.transform = `perspective(700px) rotateX(${y*-14}deg) rotateY(${x*14}deg) scale(1.03)`;
+      card.style.background = `radial-gradient(circle at ${(x+.5)*100}% ${(y+.5)*100}%, rgba(255,255,255,.07), transparent 55%), ${card.classList.contains('featured') ? 'linear-gradient(160deg,#060e24,#0b1d45)' : 'rgba(255,255,255,.03)'}`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform .6s cubic-bezier(.22,1,.36,1), background .6s';
+      card.style.transform = card.classList.contains('featured') ? 'perspective(700px) scale(1.04)' : 'perspective(700px) scale(1)';
+      card.style.background = '';
+    });
+  });
+});
+
+// ── MAGNETIC BUTTONS ──
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.btn-primary,.cta-btn-primary,.cta-btn-ghost,.price-btn,.nav-cta,.footer-social-btn').forEach(el => {
+    let ox=0, oy=0, raf=null;
+    el.style.willChange = 'transform';
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left+r.width/2)) * 0.38;
+      const dy = (e.clientY - (r.top+r.height/2)) * 0.38;
+      ox = dx; oy = dy;
+      el.style.transition = 'transform .05s ease';
+      el.style.transform = `translate(${dx}px,${dy}px) scale(1.05)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      let cx=ox, cy=oy;
+      cancelAnimationFrame(raf);
+      el.style.transition = 'none';
+      function spring(){
+        cx += (0-cx)*0.12; cy += (0-cy)*0.12;
+        el.style.transform = `translate(${cx}px,${cy}px) scale(1)`;
+        if(Math.abs(cx)>0.1||Math.abs(cy)>0.1){ raf=requestAnimationFrame(spring); }
+        else { el.style.transform=''; el.style.transition=''; }
+      }
+      raf = requestAnimationFrame(spring);
+      ox=0; oy=0;
+    });
+  });
+});
+
+// ── NAV ACTIVE STATE (highlight current page) ──
+document.addEventListener('DOMContentLoaded', function(){
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if(a.getAttribute('href') === path) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
