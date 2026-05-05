@@ -329,66 +329,434 @@ h2{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-1.5px;line-hei
 @media(max-width:800px){.stats-inner{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.stats-inner{grid-template-columns:1fr}}
 
-.reel-coming{cursor:default;}
-.reel-coming .reel-thumb{pointer-events:none;}
-.reel-coming-badge{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(2px);
+
+/* ── PORTFOLIO FILMSTRIP ── */
+#portfolio{background:#050505;padding:100px 0}
+#portfolio .section-header{padding:0 24px}
+
+/* drag-to-scroll filmstrip */
+.filmstrip-outer{
+  position:relative;
+  margin-top:56px;
+  /* fade edges */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
 }
-.reel-coming-badge span{font-size:22px;opacity:.6;}
-.reel-coming-badge p{
-  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-  color:rgba(255,255,255,.4);
+.filmstrip{
+  display:flex;
+  gap:12px;
+  padding:12px 5vw 28px;
+  overflow-x:auto;
+  scroll-snap-type:none;
+  -webkit-overflow-scrolling:touch;
+  cursor:grab;
+  user-select:none;
+  scroll-behavior:auto;
+}
+.filmstrip:active{cursor:grabbing;}
+.filmstrip::-webkit-scrollbar{display:none;}
+.filmstrip{scrollbar-width:none;}
+
+/* card */
+.fs-card{
+  flex-shrink:0;
+  width:clamp(160px,22vw,220px);
+  aspect-ratio:9/16;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  background:#111;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;
+  cursor:pointer;
+}
+.fs-card:hover{
+  transform:scale(1.04) translateY(-6px);
+  box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.1);
+  z-index:2;
 }
 
-/* ── PORTFOLIO ── */
-#portfolio{background:#050505}
-.port-timeline-wrap{max-width:1100px;margin:0 auto}
-.timeline-scrubber{position:relative;margin-bottom:56px;user-select:none;padding:0 16px}
-.tl-drag-hint{text-align:center;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px}
-.tl-drag-hint::before,.tl-drag-hint::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
-.tl-track{position:relative;height:4px;border-radius:4px;background:rgba(255,255,255,.08);cursor:pointer;margin:32px 0 48px}
-.tl-fill{position:absolute;top:0;left:0;height:100%;border-radius:4px;background:linear-gradient(90deg,#0071e3,#42a1ec,#a8d8ff);width:0%}
-.tl-dots-row{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);display:flex;justify-content:space-between;pointer-events:none}
-.tl-dot{position:relative;display:flex;flex-direction:column;align-items:center;pointer-events:all;cursor:pointer}
-.tl-dot-inner{width:14px;height:14px;border-radius:50%;background:#1a1a1a;border:2px solid rgba(255,255,255,.15);transition:all .35s cubic-bezier(.22,1,.36,1)}
-.tl-dot.passed .tl-dot-inner{background:var(--accent);border-color:var(--accent)}
-.tl-dot.active .tl-dot-inner{background:#fff;border-color:#fff;transform:scale(1.35);box-shadow:0 0 0 4px rgba(0,113,227,.25),0 0 16px rgba(0,113,227,.5)}
-.tl-dot-label{position:absolute;top:22px;display:flex;flex-direction:column;align-items:center;gap:2px;white-space:nowrap}
-.tl-vol{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .3s}
-.tl-name{font-size:12px;font-weight:600;color:rgba(255,255,255,.35);transition:color .3s}
-.tl-dot.active .tl-vol{color:var(--accent)}
-.tl-dot.active .tl-name{color:#fff}
-.tl-dot.passed .tl-vol,.tl-dot.passed .tl-name{color:rgba(255,255,255,.5)}
-.tl-handle{position:absolute;top:50%;transform:translate(-50%,-50%);z-index:10;cursor:grab;left:0%}
-.tl-handle.dragging{cursor:grabbing}
-.tl-handle-ring{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(0,113,227,.4);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);animation:hpulse 2s ease-in-out infinite}
-.tl-handle-core{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#42a1ec,#0071e3);box-shadow:0 0 20px rgba(0,113,227,.8);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-@keyframes hpulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.4}50%{transform:translate(-50%,-50%) scale(1.5);opacity:.1}}
-.port-panels{position:relative;overflow:hidden;min-height:380px}
-.port-panels-slider{display:flex;width:500%;transition:transform .55s cubic-bezier(.22,1,.36,1)}
-.port-panel{width:20%;flex-shrink:0}
-.port-panel.anim-enter .reel-item{animation:reelSlideIn .5s cubic-bezier(.22,1,.36,1) both}
-@keyframes reelSlideIn{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:translateX(0)}}
-.port-block-header{margin-bottom:24px;display:flex;align-items:center;gap:20px}
-.port-block-header::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(255,255,255,.08),transparent)}
-.port-block-title{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
-.port-block-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)}
-.port-block-name{font-size:20px;font-weight:700;letter-spacing:-.5px;color:#fff}
-.reel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.reel-item{aspect-ratio:9/16;position:relative;overflow:hidden;cursor:pointer;border-radius:4px;background:#111}
-.reel-thumb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:52px;color:rgba(255,255,255,.12);transition:transform .5s ease}
-.reel-item:hover .reel-thumb{transform:scale(1.06)}
-.reel-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.2) 40%,transparent 70%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:space-between;padding:16px}
-.reel-item:hover .reel-overlay{opacity:1}
-.reel-play{width:44px;height:44px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;align-self:center;margin:auto;transition:transform .2s,background .2s}
-.reel-item:hover .reel-play{transform:scale(1.1);background:rgba(255,255,255,.25)}
-.reel-info{margin-top:auto}
-.reel-name{font-size:13px;font-weight:600;color:#fff}
-.reel-meta{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+/* gradient thumb bg */
+.fs-thumb{
+  width:100%;height:100%;
+  position:absolute;inset:0;
+  overflow:hidden;
+  background:#111;
+}
+.fs-thumb img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  position:relative;
+  z-index:1;
+  transition:transform .5s cubic-bezier(.22,1,.36,1);
+}
+.fs-card:hover .fs-thumb img{transform:scale(1.08);}
+
+/* overlay — slides up on hover */
+.fs-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.4) 45%,transparent 75%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:18px 14px;
+  opacity:0;
+  z-index:2;
+  transform:translateY(8px);
+  transition:opacity .3s ease,transform .3s ease;
+}
+.fs-card:hover .fs-overlay{opacity:1;transform:none;}
+
+/* play button */
+.fs-play{
+  width:40px;height:40px;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+  position:absolute;top:50%;left:50%;
+  z-index:3;
+  transform:translate(-50%,-50%) scale(0.7);
+  opacity:0;
+  transition:opacity .25s,transform .25s;
+}
+.fs-card:hover .fs-play{opacity:1;transform:translate(-50%,-50%) scale(1);}
+
+/* tag + title */
+.fs-tag{
+  font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:5px;
+}
+.fs-title{font-size:13px;font-weight:700;color:#fff;line-height:1.3;}
+.fs-meta{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;}
+
+/* coming soon state */
+.fs-card.fs-soon .fs-thumb{filter:blur(4px) brightness(.35);}
+.fs-soon-badge{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;pointer-events:none;
+}
+.fs-soon-badge span{font-size:20px;opacity:.5;}
+.fs-soon-badge p{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+
+/* scroll hint bar */
+.filmstrip-hint{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin-top:0;padding-bottom:0;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,.18);
+}
+.filmstrip-hint::before,.filmstrip-hint::after{
+  content:'';flex:1;max-width:60px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12));
+}
+.filmstrip-hint::after{transform:scaleX(-1);}
+
+/* scroll progress bar */
+.filmstrip-progress{
+  max-width:200px;margin:18px auto 0;
+  height:2px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;
+}
+.filmstrip-progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#0071e3,#42a1ec);
+  border-radius:2px;
+  transition:width .1s linear;
+}
+
+/* ── LASER SWEEP HINT ── */
+/* ── LASER SWEEP HINT ── */
+.laser-hint{
+  display:flex;flex-direction:column;align-items:center;
+  gap:16px;margin-top:16px;
+  transition:opacity .6s ease;
+}
+.laser-hint.hidden{ opacity:0;pointer-events:none; }
+
+.laser-stage{
+  position:relative;
+  display:flex;align-items:center;gap:5px;
+  height:60px;
+  padding:4px 2px;
+}
+
+/* floor glow under stage */
+.laser-stage::after{
+  content:'';position:absolute;
+  bottom:-8px;left:10%;right:10%;height:6px;
+  background:radial-gradient(ellipse,rgba(0,113,227,.18),transparent 70%);
+  pointer-events:none;
+  transition:opacity .4s;
+}
+.laser-hint.active .laser-stage::after{
+  opacity:0;
+}
+
+/* mini filmstrip cards */
+.lh-card{
+  width:28px;height:48px;border-radius:5px;flex-shrink:0;
+  background:rgba(255,255,255,.035);
+  border:0.5px solid rgba(255,255,255,.07);
+  position:relative;overflow:hidden;
+  transition:border-color .12s,background .12s,transform .15s;
+}
+/* inner diagonal shimmer */
+.lh-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.06) 0%,transparent 55%);
+}
+/* top edge accent line per card */
+.lh-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:rgba(255,255,255,.06);
+  transition:background .12s;
+}
+
+/* lit state — laser is passing over */
+.lh-card.lit{
+  border-color:rgba(0,113,227,.6);
+  background:rgba(0,60,160,.12);
+  transform:scaleY(1.04);
+}
+.lh-card.lit::before{
+  background:linear-gradient(90deg,transparent,rgba(66,161,236,.7),transparent);
+}
+
+/* glitch flicker on lit card */
+.lh-card.glitch{
+  animation:lhGlitch .12s steps(2) forwards;
+}
+@keyframes lhGlitch{
+  0%  { transform:scaleY(1.04) translateX(0); filter:brightness(1.4) hue-rotate(0deg); }
+  33% { transform:scaleY(1.06) translateX(2px); filter:brightness(1.8) hue-rotate(20deg); }
+  66% { transform:scaleY(1.02) translateX(-2px); filter:brightness(1.2); }
+  100%{ transform:scaleY(1.04) translateX(0); filter:brightness(1); }
+}
+
+/* the laser beam */
+.lh-laser{
+  position:absolute;
+  top:-4px;bottom:-4px;
+  width:2px;
+  background:linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,113,227,.5) 12%,
+    #5eb8ff 42%,
+    #fff    50%,
+    #5eb8ff 58%,
+    rgba(0,113,227,.5) 88%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 3px 1px rgba(120,190,255,.9),
+    0 0 10px 3px rgba(0,113,227,.6),
+    0 0 22px 6px rgba(0,113,227,.25),
+    0 0 40px 10px rgba(0,80,200,.1);
+  border-radius:1px;
+  left:0;
+  pointer-events:none;
+  will-change:transform;
+}
+/* arrowhead tips */
+.lh-laser::before,
+.lh-laser::after{
+  content:'';position:absolute;
+  left:50%;transform:translateX(-50%);
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+}
+.lh-laser::before{
+  top:-6px;
+  border-bottom:6px solid rgba(120,190,255,.9);
+}
+.lh-laser::after{
+  bottom:-6px;
+  border-top:6px solid rgba(120,190,255,.9);
+}
+
+/* glow trail behind beam */
+.lh-trail{
+  position:absolute;
+  top:0;bottom:0;left:0;width:0px;
+  background:linear-gradient(to right,transparent,rgba(0,113,227,.06));
+  pointer-events:none;
+  border-radius:0 2px 2px 0;
+  will-change:width;
+}
+
+/* scan line that flickers across the whole stage */
+.lh-scanline{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 48%,rgba(0,113,227,.04) 50%,transparent 52%);
+  animation:lhScanlineMove 2s linear infinite;
+  pointer-events:none;
+}
+@keyframes lhScanlineMove{
+  from{transform:translateY(-100%)}
+  to{transform:translateY(100%)}
+}
+
+/* corner brackets on stage */
+.lh-corner{
+  position:absolute;width:7px;height:7px;
+  border-color:rgba(0,113,227,.5);border-style:solid;
+}
+.lh-corner.tl{top:0;left:0;border-width:1px 0 0 1px}
+.lh-corner.tr{top:0;right:0;border-width:1px 1px 0 0}
+.lh-corner.bl{bottom:0;left:0;border-width:0 0 1px 1px}
+.lh-corner.br{bottom:0;right:0;border-width:0 1px 1px 0}
+
+/* label */
+.lh-label{
+  display:flex;align-items:center;gap:10px;
+  font-size:10px;font-weight:700;letter-spacing:4px;
+  font-family:monospace;text-transform:uppercase;
+  color:rgba(255,255,255,.2);
+  transition:color .5s,gap .5s;
+  user-select:none;
+}
+.lh-bracket{
+  font-size:15px;font-weight:300;line-height:1;
+  color:rgba(0,113,227,.4);
+  transition:color .4s,transform .4s;
+}
+.lh-text{ transition:letter-spacing .5s,color .5s; }
+
+/* blink cursor after label */
+.lh-cursor{
+  width:6px;height:11px;
+  background:rgba(0,113,227,.5);
+  display:inline-block;
+  animation:lhBlink .9s step-end infinite;
+}
+@keyframes lhBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* active (dragging) state */
+.laser-hint.active .lh-label{ color:rgba(255,255,255,.6);gap:14px; }
+.laser-hint.active .lh-bracket{ color:rgba(66,161,236,.9);transform:scaleX(1.2); }
+.laser-hint.active .lh-text{ letter-spacing:6px; }
+.laser-hint.active .lh-cursor{ background:rgba(66,161,236,.9); }
+
+/* ── LIGHT SWEEPS ── */
+
+/* universal sweep mixin via pseudo */
+@keyframes lightSweep{
+  0%  { transform:translateX(-120%) skewX(-15deg); opacity:0; }
+  10% { opacity:1; }
+  90% { opacity:1; }
+  100%{ transform:translateX(220%) skewX(-15deg); opacity:0; }
+}
+
+/* hero heading sweep — once on load */
+h1{position:relative;overflow:hidden;}
+h1::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.07) 50%,transparent 70%);
+  transform:translateX(-120%) skewX(-15deg);
+  animation:lightSweep 1.8s cubic-bezier(.4,0,.2,1) both 1.2s;
+  pointer-events:none;
+}
+
+/* btn-primary sweep on hover */
+.btn-primary{overflow:hidden;position:relative;}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.18) 50%,transparent 75%);
+  transform:translateX(-120%) skewX(-15deg);
+  transition:none;
+  pointer-events:none;
+}
+.btn-primary:hover::after{
+  animation:lightSweep .55s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* stat cards sweep on hover */
+.stat-card{overflow:hidden;position:relative;}
+.stat-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.06) 50%,transparent 80%);
+  transform:translateX(-120%) skewX(-15deg);
+  pointer-events:none;
+  z-index:1;
+}
+.stat-card:hover::after{
+  animation:lightSweep .6s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* service cards sweep on hover */
+.svc-card{position:relative;}
+.svc-card .svc-sweep{
+  position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.045) 50%,transparent 80%);
+  transform:translateX(-120%) skewX(-15deg);
+  pointer-events:none;z-index:2;border-radius:inherit;
+}
+.svc-card:hover .svc-sweep{
+  animation:lightSweep .65s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* filmstrip card sweep on hover */
+.fs-card .fs-sweep{
+  position:absolute;inset:0;z-index:4;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.12) 50%,transparent 80%);
+  transform:translateX(-120%) skewX(-12deg);
+  pointer-events:none;
+}
+.fs-card:hover .fs-sweep{
+  animation:lightSweep .5s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+/* testi cards sweep on hover */
+.testi-card{position:relative;overflow:hidden;}
+.testi-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.04) 50%,transparent 80%);
+  transform:translateX(-120%) skewX(-15deg);
+  pointer-events:none;
+}
+.testi-card:hover::after{
+  animation:lightSweep .6s cubic-bezier(.4,0,.2,1) forwards;
+}
+.lightbox{
+  position:fixed;inset:0;z-index:99990;
+  background:rgba(0,0,0,.92);
+  backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lb-inner{
+  position:relative;
+  width:min(380px,90vw);
+  aspect-ratio:9/16;
+  border-radius:20px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 40px 120px rgba(0,0,0,.8);
+  transform:scale(.92);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.lightbox.open .lb-inner{transform:scale(1);}
+.lb-inner iframe{width:100%;height:100%;border:none;display:block;}
+.lb-close{
+  position:absolute;top:-48px;right:0;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:#fff;font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s,transform .2s;
+}
+.lb-close:hover{background:rgba(255,255,255,.2);transform:scale(1.1);}
+.lb-info{
+  position:absolute;bottom:-52px;left:0;
+  display:flex;flex-direction:column;gap:3px;
+}
+.lb-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);}
+.lb-title{font-size:15px;font-weight:700;color:#fff;}
+
+/* gradient swatches reused from old code */
 .rg1{background:linear-gradient(160deg,#0d0221,#240046,#5a189a)}
 .rg2{background:linear-gradient(160deg,#03071e,#370617,#6a040f)}
 .rg3{background:linear-gradient(160deg,#012a4a,#013a63,#0466c8)}
@@ -672,7 +1040,134 @@ footer{background:#000;position:relative;overflow:hidden;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,.18)}
 .footer-made{font-size:12px;color:rgba(255,255,255,.18)}
 .footer-made span{color:rgba(255,255,255,.4)}
-@media(max-width:600px){nav .nav-links{display:none}.footer-top{flex-direction:column}}
+/* ── CONTACT SECTION ── */
+#contact{
+  padding:120px 28px 80px;
+  max-width:1100px;
+  margin:0 auto;
+}
+.contact-section-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.contact-section-info .contact-eyebrow{
+  font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+}
+.contact-section-info h2{
+  font-size:clamp(32px,4vw,50px);
+  font-weight:700;letter-spacing:-.03em;line-height:1.1;
+  margin-bottom:18px;
+}
+.contact-section-info h2 span{color:var(--accent);}
+.contact-section-info .contact-sub{
+  font-size:15px;line-height:1.7;
+  color:rgba(255,255,255,.5);
+  margin-bottom:40px;max-width:380px;
+}
+.contact-details{display:flex;flex-direction:column;gap:14px;margin-bottom:40px;}
+.contact-detail-card{
+  display:flex;align-items:center;gap:16px;
+  background:rgba(255,255,255,.03);
+  border:0.5px solid rgba(255,255,255,.07);
+  border-radius:14px;padding:16px 20px;
+  text-decoration:none;
+  transition:background .2s,border-color .2s,transform .2s;
+  position:relative;overflow:hidden;
+}
+.contact-detail-card:hover{
+  background:rgba(255,255,255,.06);
+  border-color:rgba(0,113,227,.3);
+  transform:translateX(4px);
+}
+.contact-detail-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.04) 50%,transparent 80%);
+  transform:translateX(-120%) skewX(-15deg);pointer-events:none;
+}
+.contact-detail-card:hover::after{animation:lightSweep .55s cubic-bezier(.4,0,.2,1) forwards;}
+.detail-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:rgba(0,113,227,.1);border:0.5px solid rgba(0,113,227,.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.detail-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:3px;}
+.detail-value{font-size:14px;font-weight:500;color:#fff;}
+.contact-socials-row{display:flex;gap:12px;}
+.cs-social-btn{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(255,255,255,.04);
+  border:0.5px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;text-decoration:none;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.cs-social-btn:hover{background:rgba(0,113,227,.12);border-color:rgba(0,113,227,.3);transform:translateY(-2px);}
+
+/* form */
+.contact-form-box{
+  background:rgba(255,255,255,.025);
+  border:0.5px solid rgba(255,255,255,.08);
+  border-radius:24px;padding:40px 36px;
+  position:sticky;top:88px;
+}
+.contact-form-box .form-title{font-size:20px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px;}
+.contact-form-box .form-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:28px;line-height:1.6;}
+.cf-group{margin-bottom:18px;}
+.cf-label{display:block;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;}
+.cf-input,.cf-select,.cf-textarea{
+  width:100%;background:rgba(255,255,255,.04);
+  border:0.5px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:14px 16px;
+  font-size:14px;color:#fff;font-family:inherit;
+  outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+  -webkit-appearance:none;
+}
+.cf-input::placeholder,.cf-textarea::placeholder{color:rgba(255,255,255,.2);}
+.cf-input:focus,.cf-select:focus,.cf-textarea:focus{
+  border-color:rgba(0,113,227,.6);
+  background:rgba(0,113,227,.04);
+  box-shadow:0 0 0 3px rgba(0,113,227,.1);
+}
+.cf-select{
+  color:rgba(255,255,255,.7);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+}
+.cf-select option{background:#111;color:#fff;}
+.cf-textarea{resize:vertical;min-height:100px;line-height:1.6;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.cf-submit{
+  width:100%;background:var(--accent);color:#fff;border:none;
+  border-radius:12px;padding:15px 24px;
+  font-size:15px;font-weight:600;font-family:inherit;
+  margin-top:6px;
+  transition:opacity .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 0 24px rgba(0,113,227,.35);
+  position:relative;overflow:hidden;
+}
+.cf-submit:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 6px 32px rgba(0,113,227,.45);}
+.cf-submit::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(105deg,transparent 20%,rgba(255,255,255,.18) 50%,transparent 80%);
+  transform:translateX(-120%) skewX(-15deg);pointer-events:none;
+}
+.cf-submit:hover::after{animation:lightSweep .55s cubic-bezier(.4,0,.2,1) forwards;}
+.cf-success{display:none;text-align:center;padding:40px 20px;}
+.cf-success.show{display:block;}
+.cf-success-icon{font-size:48px;margin-bottom:16px;}
+.cf-success-title{font-size:22px;font-weight:600;margin-bottom:8px;}
+.cf-success-sub{font-size:14px;color:rgba(255,255,255,.45);line-height:1.6;}
+
+@media(max-width:768px){
+  .contact-section-inner{grid-template-columns:1fr;gap:48px;}
+  .contact-form-box{padding:28px 22px;position:static;}
+  .cf-row{grid-template-columns:1fr;}
+}
 
 /* ── BREEZE ── */
 .breeze-container{position:fixed;bottom:50px;right:50px;width:0;height:0;pointer-events:none;z-index:199;overflow:visible}
@@ -746,12 +1241,12 @@ footer{background:#000;position:relative;overflow:hidden;}
 
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="logo">tanmayx<span>edits</span></a>
+    <a href="index.html" class="logo">tanmayx<span>edits</span></a>
     <ul class="nav-links">
       <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="portfolio.html" target="_blank">Full Portfolio ↗</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="contact.html" class="nav-cta">Work With Us</a>
   </div>
@@ -762,10 +1257,10 @@ footer{background:#000;position:relative;overflow:hidden;}
   <canvas id="heroCanvas"></canvas>
   <div class="hero-eyebrow">Content Creation · Reels · Social Media</div>
   <h1 style="position:relative;z-index:1"><span class="line1 gradient-text">Content that</span><span class="accent-word">stops the scroll.</span></h1>
-  <p class="hero-sub">Tanmay Utekar — video editor &amp; VFX artist based in Thane, Maharashtra. Cinematic reels, motion graphics &amp; social content that gets views.</p>
+  <p class="hero-sub">Tanmay Utekar, video editor &amp; VFX artist based in Thane, Maharashtra. Cinematic reels, motion graphics &amp; social content that gets views.</p>
   <div class="hero-btns">
     <a href="#portfolio" class="btn-primary">See Our Reels</a>
-    <a href="portfolio" class="btn-secondary">Full Portfolio ↗</a>
+    <a href="portfolio.html" class="btn-secondary">Full Portfolio ↗</a>
   </div>
   <div class="hero-tags">
     <span class="tag">🎬 Music Video Reels</span>
@@ -830,7 +1325,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="stat-title">Projects Delivered</div>
       <div class="stat-desc">From reels to full campaigns</div>
-      <div class="stat-bar-wrap"><div class="stat-bar" id="bar3" style="--bw:85%"></div></div>
+      <div class="stat-bar-wrap"><div class="stat-bar" id="bar3" style="--bw:100%"></div></div>
     </div>
 
     <div class="stat-card">
@@ -845,7 +1340,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="stat-title">Client Satisfaction</div>
       <div class="stat-desc">They keep coming back</div>
-      <div class="stat-bar-wrap"><div class="stat-bar" id="bar4" style="--bw:100%"></div></div>
+      <div class="stat-bar-wrap"><div class="stat-bar" id="bar4" style="--bw:98%"></div></div>
     </div>
 
   </div>
@@ -857,8 +1352,8 @@ footer{background:#000;position:relative;overflow:hidden;}
   var stats=[
     {id:'s1',ri:'ring1',target:3},
     {id:'s2',ri:'ring2',target:10},
-    {id:'s3',ri:'ring3',target:30},
-    {id:'s4',ri:'ring4',target:100}
+    {id:'s3',ri:'ring3',target:1000},
+    {id:'s4',ri:'ring4',target:98}
   ];
 
   // start all numbers at 0, count up when user first scrolls to/hovers the section
@@ -876,20 +1371,27 @@ footer{background:#000;position:relative;overflow:hidden;}
       var ring=document.getElementById(s.ri);
       if(!el) return;
       el.textContent='0';
-      var current=0;
       setTimeout(function(){
-        var interval=setInterval(function(){
-          current++;
-          el.textContent=current;
-          if(current>=s.target){
-            clearInterval(interval);
+        var duration=2000;
+        var startTime=null;
+        function easeOut(t){return 1-Math.pow(1-t,3);}
+        function step(ts){
+          if(!startTime) startTime=ts;
+          var progress=Math.min((ts-startTime)/duration,1);
+          var val=Math.round(easeOut(progress)*s.target);
+          el.textContent=val.toLocaleString('en-IN');
+          if(progress<1){
+            requestAnimationFrame(step);
+          } else {
+            el.textContent=s.target.toLocaleString('en-IN');
             el.dataset.final=String(s.target);
             el.classList.add('glow');
             if(ring) ring.classList.add('burst');
             setTimeout(function(){el.classList.remove('glow');},900);
           }
-        }, 2800/s.target);
-      }, idx*400);
+        }
+        requestAnimationFrame(step);
+      }, idx*300);
     });
     setTimeout(function(){
       ['bar1','bar2','bar3','bar4'].forEach(function(id){
@@ -954,103 +1456,185 @@ footer{background:#000;position:relative;overflow:hidden;}
   <div class="section-header reveal">
     <div class="section-label">Our Work</div>
     <h2>Every frame,<br>intentionally crafted.</h2>
-    <p class="section-sub">Browse our reel categories — hover to preview, tap to explore.</p>
+    <p class="section-sub">Music reels, talking heads, events, motion graphics. Drag to explore.</p>
   </div>
-  <div class="port-timeline-wrap">
-    <div class="timeline-scrubber" id="scrubber">
-      <div class="tl-drag-hint">drag to explore</div>
-      <div class="tl-track" id="tlTrack">
-        <div class="tl-fill" id="tlFill"></div>
-        <div class="tl-dots-row">
-          <div class="tl-dot active" data-idx="0"><div class="tl-dot-inner"></div><div class="tl-dot-label"><span class="tl-vol">Vol. 01</span><span class="tl-name">Music Video</span></div></div>
-          <div class="tl-dot" data-idx="1"><div class="tl-dot-inner"></div><div class="tl-dot-label"><span class="tl-vol">Vol. 02</span><span class="tl-name">Talking Head</span></div></div>
-          <div class="tl-dot" data-idx="2"><div class="tl-dot-inner"></div><div class="tl-dot-label"><span class="tl-vol">Vol. 03</span><span class="tl-name">Motion Graphics</span></div></div>
-          <div class="tl-dot" data-idx="3"><div class="tl-dot-inner"></div><div class="tl-dot-label"><span class="tl-vol">Vol. 04</span><span class="tl-name">Product Reels</span></div></div>
-          <div class="tl-dot" data-idx="4"><div class="tl-dot-inner"></div><div class="tl-dot-label"><span class="tl-vol">Vol. 05</span><span class="tl-name">Carousels</span></div></div>
-        </div>
-        <div class="tl-handle" id="tlHandle"><div class="tl-handle-ring"></div><div class="tl-handle-core"></div></div>
-      </div>
-    </div>
-    <div class="port-panels" id="portPanels">
-      <div class="port-panels-slider" id="portSlider">
-        <div class="port-panel" data-idx="0">
-          <div class="port-block-header"><div class="port-block-title"><span class="port-block-label">Vol. 01</span><span class="port-block-name">Music Video Reels</span></div></div>
-          <div class="reel-grid">
-            <div class="reel-item"><div class="reel-thumb rg1">🎵</div><div class="reel-overlay"><div class="reel-play">▶</div><div class="reel-info"><div class="reel-name">Neon Nights</div><div class="reel-meta">Artist Reel · 45s</div></div></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg7" style="filter:blur(3px) brightness(.4)">🎶</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg8" style="filter:blur(3px) brightness(.4)">🎤</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-          </div>
-        </div>
-        <div class="port-panel" data-idx="1">
-          <div class="port-block-header"><div class="port-block-title"><span class="port-block-label">Vol. 02</span><span class="port-block-name">Talking Head Reels</span></div></div>
-          <div class="reel-grid">
-            <div class="reel-item"><div class="reel-thumb rg4">🎙️</div><div class="reel-overlay"><div class="reel-play">▶</div><div class="reel-info"><div class="reel-name">Founder Story</div><div class="reel-meta">Brand · 60s</div></div></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg5" style="filter:blur(3px) brightness(.4)">💬</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg2" style="filter:blur(3px) brightness(.4)">🧠</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-          </div>
-        </div>
-        <div class="port-panel" data-idx="2">
-          <div class="port-block-header"><div class="port-block-title"><span class="port-block-label">Vol. 03</span><span class="port-block-name">Motion Graphics</span></div></div>
-          <div class="reel-grid">
-            <div class="reel-item"><div class="reel-thumb rg8">⚡</div><div class="reel-overlay"><div class="reel-play">▶</div><div class="reel-info"><div class="reel-name">Logo Reveal</div><div class="reel-meta">Brand · 10s</div></div></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg3" style="filter:blur(3px) brightness(.4)">🌀</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg7" style="filter:blur(3px) brightness(.4)">🎆</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-          </div>
-        </div>
-        <div class="port-panel" data-idx="3">
-          <div class="port-block-header"><div class="port-block-title"><span class="port-block-label">Vol. 04</span><span class="port-block-name">Product Reels</span></div></div>
-          <div class="reel-grid">
-            <div class="reel-item reel-coming"><div class="reel-thumb rg6" style="filter:blur(3px) brightness(.4)">📦</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg4" style="filter:blur(3px) brightness(.4)">👗</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming"><div class="reel-thumb rg2" style="filter:blur(3px) brightness(.4)">🍃</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-          </div>
-        </div>
-        <div class="port-panel" data-idx="4">
-          <div class="port-block-header"><div class="port-block-title"><span class="port-block-label">Vol. 05</span><span class="port-block-name">Carousel Designs</span></div></div>
-          <div class="reel-grid">
-            <div class="reel-item reel-coming" style="aspect-ratio:1"><div class="reel-thumb rg3" style="aspect-ratio:1;filter:blur(3px) brightness(.4)">🎨</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming" style="aspect-ratio:1"><div class="reel-thumb rg5" style="aspect-ratio:1;filter:blur(3px) brightness(.4)">📊</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-            <div class="reel-item reel-coming" style="aspect-ratio:1"><div class="reel-thumb rg9" style="aspect-ratio:1;filter:blur(3px) brightness(.4)">✨</div><div class="reel-coming-badge"><span>🔒</span><p>Coming Soon</p></div></div>
-          </div>
+
+  <!-- FILMSTRIP -->
+  <div class="filmstrip-outer reveal">
+    <div class="filmstrip" id="filmstrip">
+
+      <!-- Card 1 — Talking Head -->
+      <div class="fs-card" data-title="Talking Head" data-tag="Talking Head" data-drive="1J8o50yaGWTyWUchJ_NEPbEs0OyzJMylU">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1J8o50yaGWTyWUchJ_NEPbEs0OyzJMylU%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Talking Head</div>
+          <div class="fs-title">Talking Head</div>
+          <div class="fs-meta">tanmayxedits</div>
         </div>
       </div>
+
+      <!-- Card 2 — CGI -->
+      <div class="fs-card" data-title="CGI Edit" data-tag="CGI" data-drive="1bU0ejVuGhEr5F2bn6_CN97nVgWUGztUj">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1bU0ejVuGhEr5F2bn6_CN97nVgWUGztUj%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">CGI</div>
+          <div class="fs-title">CGI Edit</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 3 — Music Video -->
+      <div class="fs-card" data-title="Music Video" data-tag="Music Video" data-drive="1IEWoDhSYdKd37_qM5CerjYvveJl3wCwW">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1IEWoDhSYdKd37_qM5CerjYvveJl3wCwW%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Music Video</div>
+          <div class="fs-title">Music Video</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 4 — Decor Video -->
+      <div class="fs-card" data-title="Decor Reel" data-tag="Decor Video" data-drive="1UmFc0mjfNmgnc-HEAdMtNOcq9CTUvZVx">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1UmFc0mjfNmgnc-HEAdMtNOcq9CTUvZVx%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Decor Video</div>
+          <div class="fs-title">Decor Reel</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 5 — Salon Video -->
+      <div class="fs-card" data-title="Salon Reel" data-tag="Salon Video" data-drive="1_i24mWwdf6PJKmk_MqI9QsRRRV7Msicq">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1_i24mWwdf6PJKmk_MqI9QsRRRV7Msicq%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Salon Video</div>
+          <div class="fs-title">Salon Reel</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 6 — Challenge Video -->
+      <div class="fs-card" data-title="Challenge Edit" data-tag="Challenge Video" data-drive="1FOUPzO3Pw1FQdfLuv_Ge0XMcRC-ExTpv">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1FOUPzO3Pw1FQdfLuv_Ge0XMcRC-ExTpv%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Challenge Video</div>
+          <div class="fs-title">Challenge Edit</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 7 — Premier Event Edit -->
+      <div class="fs-card" data-title="Premier Event" data-tag="Premier Event Edit" data-drive="1KQKjSyZFC8m5udkhydb6gSTvwhH0cHtE">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1KQKjSyZFC8m5udkhydb6gSTvwhH0cHtE%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Premier Event Edit</div>
+          <div class="fs-title">Premier Event</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 8 — Real Estate Video -->
+      <div class="fs-card" data-title="Real Estate Reel" data-tag="Real Estate Video" data-drive="1mSx0UH2fLpn4Ef3Pgd3ao-drl4dhlXMg">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1mSx0UH2fLpn4Ef3Pgd3ao-drl4dhlXMg%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Real Estate Video</div>
+          <div class="fs-title">Real Estate Reel</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
+      <!-- Card 9 — Food Truck Video -->
+      <div class="fs-card" data-title="Food Truck Reel" data-tag="Food Truck Video" data-drive="1oNs_MCiLigLN1jw7e3WWBRjGqZ-PI-vW">
+        <div class="fs-sweep"></div><div class="fs-thumb"><img src="https://wsrv.nl/?url=https%3A%2F%2Fdrive.google.com%2Fthumbnail%3Fid%3D1oNs_MCiLigLN1jw7e3WWBRjGqZ-PI-vW%26sz%3Dw400&w=400&output=jpg" alt="" loading="lazy" crossorigin="anonymous"></div>
+        <div class="fs-play">▶</div>
+        <div class="fs-overlay">
+          <div class="fs-tag">Food Truck Video</div>
+          <div class="fs-title">Food Truck Reel</div>
+          <div class="fs-meta">tanmayxedits</div>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div style="text-align:center;margin-top:56px;padding-bottom:20px;">
-    <a href="portfolio.html" class="btn-secondary" style="display:inline-flex;align-items:center;gap:10px;font-size:15px;">
-      View Full Portfolio ↗
-    </a>
+
+  <!-- LASER SWEEP HINT -->
+  <div class="laser-hint" id="laserHint">
+    <div class="laser-stage">
+      <div class="lh-scanline"></div>
+      <div class="lh-corner tl"></div>
+      <div class="lh-corner tr"></div>
+      <div class="lh-corner bl"></div>
+      <div class="lh-corner br"></div>
+      <div class="lh-card" data-i="0"></div>
+      <div class="lh-card" data-i="1"></div>
+      <div class="lh-card" data-i="2"></div>
+      <div class="lh-card" data-i="3"></div>
+      <div class="lh-card" data-i="4"></div>
+      <div class="lh-card" data-i="5"></div>
+      <div class="lh-card" data-i="6"></div>
+      <div class="lh-trail" id="laserTrail"></div>
+      <div class="lh-laser" id="laserBeam"></div>
+    </div>
+    <div class="lh-label" id="laserLabel">
+      <span class="lh-bracket">[</span>
+      <span class="lh-text">DRAG TO EXPLORE</span>
+      <span class="lh-bracket">]</span>
+      <span class="lh-cursor"></span>
+    </div>
   </div>
+  <div class="filmstrip-progress"><div class="filmstrip-progress-fill" id="fsProgressFill"></div></div>
+
+
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner" id="lbInner">
+    <div class="lb-close" id="lbClose">✕</div>
+    <iframe id="lbFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div class="lb-info">
+      <div class="lb-tag" id="lbTag"></div>
+      <div class="lb-title" id="lbTitle"></div>
+    </div>
+  </div>
+</div>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="section-header reveal">
     <div class="section-label">What We Offer</div>
     <h2>Everything your brand<br>needs to grow online.</h2>
-    <p class="section-sub">End-to-end content creation and marketing — handled by our team.</p>
+    <p class="section-sub">End-to-end content creation and marketing, handled by our team.</p>
   </div>
   <div class="svc-grid">
-    
-<div class="svc-card c1">
+
+    <div class="svc-card c1"><div class="svc-sweep"></div>
       <span class="svc-bg-icon">🎬</span>
       <div class="svc-num">01</div>
       <span class="svc-icon-big">🎬</span>
-      <div class="svc-name">Reel Editing</div>
+      <div class="svc-name">Video Editing</div>
       <div class="svc-desc">Cinematic, high-retention reels that hook viewers in the first second and keep them watching till the end.</div>
       <div class="svc-tags"><span class="svc-tag">Music Video</span><span class="svc-tag">Talking Head</span><span class="svc-tag">Beat Sync</span><span class="svc-tag">Color Grade</span></div>
     </div>
 
-   <div class="svc-card c2">
+    <div class="svc-card c2"><div class="svc-sweep"></div>
       <span class="svc-bg-icon">✨</span>
       <div class="svc-num">02</div>
       <span class="svc-icon-big">✨</span>
       <div class="svc-name">Motion Graphics</div>
-      <div class="svc-desc">Animated visuals that make your brand move — from logo reveals to full cinematic promos.</div>
+      <div class="svc-desc">Animated visuals that make your brand move, from logo reveals to full cinematic promos.</div>
       <div class="svc-tags"><span class="svc-tag">Logo Reveals</span><span class="svc-tag">Kinetic Type</span><span class="svc-tag">Animations</span><span class="svc-tag">Ad Design</span></div>
     </div>
 
-    <div class="svc-card c3">
+    <div class="svc-card c3"><div class="svc-sweep"></div>
       <span class="svc-bg-icon">🎨</span>
       <div class="svc-num">03</div>
       <span class="svc-icon-big">🎨</span>
@@ -1059,16 +1643,16 @@ footer{background:#000;position:relative;overflow:hidden;}
       <div class="svc-tags"><span class="svc-tag">Brand Templates</span><span class="svc-tag">Educational</span><span class="svc-tag">Product</span><span class="svc-tag">Infographics</span></div>
     </div>
 
-    <div class="svc-card c4">
+    <div class="svc-card c4"><div class="svc-sweep"></div>
       <span class="svc-bg-icon">📷</span>
       <div class="svc-num">04</div>
       <span class="svc-icon-big">📷</span>
-      <div class="svc-name">Photography</div>
-      <div class="svc-desc">High-end photography for products, events, and editorial campaigns that demand attention.</div>
-      <div class="svc-tags"><span class="svc-tag">Commercial</span><span class="svc-tag">Lifestyle</span><span class="svc-tag">Events</span><span class="svc-tag">Retouching</span></div>
+      <div class="svc-name">Videography</div>
+      <div class="svc-desc">Creative video shoots for events, brands and creators, built to stop the scroll and tell your story.</div>
+      <div class="svc-tags"><span class="svc-tag">Commercial</span><span class="svc-tag">Lifestyle</span><span class="svc-tag">Creators</span><span class="svc-tag">Brands</span><span class="svc-tag">Events</span></div>
     </div>
 
-    <div class="svc-card c5">
+    <div class="svc-card c5"><div class="svc-sweep"></div>
       <span class="svc-bg-icon">📱</span>
       <div class="svc-num">05</div>
       <span class="svc-icon-big">📱</span>
@@ -1077,7 +1661,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       <div class="svc-tags"><span class="svc-tag">Content Planning</span><span class="svc-tag">Copywriting</span><span class="svc-tag">Scheduling</span><span class="svc-tag">Engagement</span></div>
     </div>
 
-   <div class="svc-card c6">
+    <div class="svc-card c6"><div class="svc-sweep"></div>
       <span class="svc-bg-icon">📈</span>
       <div class="svc-num">06</div>
       <span class="svc-icon-big">📈</span>
@@ -1117,7 +1701,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#ff9f1c,#e07b00)">SK</div><div class="testi-info"><div class="testi-name">Sameer Khan</div><div class="testi-role">D2C Brand Owner</div></div><div class="testi-stars">★★★★★</div></div>
-        <p class="testi-text">"We used to spend 3x more on another agency for half the quality. tanmayxedits is the real deal — fast delivery, insane creativity."</p>
+        <p class="testi-text">"We used to spend 3x more on another agency for half the quality. tanmayxedits is the real deal, fast delivery, insane creativity."</p>
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#31a8ff,#0077cc)">DT</div><div class="testi-info"><div class="testi-name">Divya Tripathi</div><div class="testi-role">Wellness Coach</div></div><div class="testi-stars">★★★★★</div></div>
@@ -1142,7 +1726,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#ff9f1c,#e07b00)">SK</div><div class="testi-info"><div class="testi-name">Sameer Khan</div><div class="testi-role">D2C Brand Owner</div></div><div class="testi-stars">★★★★★</div></div>
-        <p class="testi-text">"We used to spend 3x more on another agency for half the quality. tanmayxedits is the real deal — fast delivery, insane creativity."</p>
+        <p class="testi-text">"We used to spend 3x more on another agency for half the quality. tanmayxedits is the real deal, fast delivery, insane creativity."</p>
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#31a8ff,#0077cc)">DT</div><div class="testi-info"><div class="testi-name">Divya Tripathi</div><div class="testi-role">Wellness Coach</div></div><div class="testi-stars">★★★★★</div></div>
@@ -1157,7 +1741,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#0071e3,#42a1ec)">KJ</div><div class="testi-info"><div class="testi-name">Kavya Joshi</div><div class="testi-role">Startup Founder</div></div><div class="testi-stars">★★★★★</div></div>
-        <p class="testi-text">"We needed content fast for our product launch. They delivered 15 pieces in 5 days — all on-brand, all stunning. Exceeded every expectation."</p>
+        <p class="testi-text">"We needed content fast for our product launch. They delivered 15 pieces in 5 days, all on-brand, all stunning. Exceeded every expectation."</p>
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#7209b7,#b5179e)">MA</div><div class="testi-info"><div class="testi-name">Mihir Agarwal</div><div class="testi-role">Fitness Influencer</div></div><div class="testi-stars">★★★★★</div></div>
@@ -1165,7 +1749,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#06d6a0,#0cb8a0)">SR</div><div class="testi-info"><div class="testi-name">Sneha Rao</div><div class="testi-role">Photographer</div></div><div class="testi-stars">★★★★★</div></div>
-        <p class="testi-text">"The BTS reel they edited for me went viral. I gained 4,000 followers in one day. The pacing, the music choice — absolutely cinematic."</p>
+        <p class="testi-text">"The BTS reel they edited for me went viral. I gained 4,000 followers in one day. The pacing, the music choice, absolutely cinematic."</p>
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#ff9f1c,#f72585)">AT</div><div class="testi-info"><div class="testi-name">Aarav Thakur</div><div class="testi-role">Restaurant Owner</div></div><div class="testi-stars">★★★★★</div></div>
@@ -1182,7 +1766,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#0071e3,#42a1ec)">KJ</div><div class="testi-info"><div class="testi-name">Kavya Joshi</div><div class="testi-role">Startup Founder</div></div><div class="testi-stars">★★★★★</div></div>
-        <p class="testi-text">"We needed content fast for our product launch. They delivered 15 pieces in 5 days — all on-brand, all stunning. Exceeded every expectation."</p>
+        <p class="testi-text">"We needed content fast for our product launch. They delivered 15 pieces in 5 days, all on-brand, all stunning. Exceeded every expectation."</p>
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#7209b7,#b5179e)">MA</div><div class="testi-info"><div class="testi-name">Mihir Agarwal</div><div class="testi-role">Fitness Influencer</div></div><div class="testi-stars">★★★★★</div></div>
@@ -1190,7 +1774,7 @@ footer{background:#000;position:relative;overflow:hidden;}
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#06d6a0,#0cb8a0)">SR</div><div class="testi-info"><div class="testi-name">Sneha Rao</div><div class="testi-role">Photographer</div></div><div class="testi-stars">★★★★★</div></div>
-        <p class="testi-text">"The BTS reel they edited for me went viral. I gained 4,000 followers in one day. The pacing, the music choice — absolutely cinematic."</p>
+        <p class="testi-text">"The BTS reel they edited for me went viral. I gained 4,000 followers in one day. The pacing, the music choice, absolutely cinematic."</p>
       </div>
       <div class="testi-card">
         <div class="testi-top"><div class="testi-avatar" style="background:linear-gradient(135deg,#ff9f1c,#f72585)">AT</div><div class="testi-info"><div class="testi-name">Aarav Thakur</div><div class="testi-role">Restaurant Owner</div></div><div class="testi-stars">★★★★★</div></div>
@@ -1211,18 +1795,14 @@ footer{background:#000;position:relative;overflow:hidden;}
     <div class="about-text reveal-right">
       <div class="section-label">About Us</div>
       <h2>We obsess over<br>every single frame.</h2>
-      <p>tanmayxedits started as a solo editing project and evolved into a full content creation team. We shoot, edit, design and strategize — all under one roof.</p>
-      <p>We don't just make content. We study what makes people stop scrolling, what makes them share, and what makes them buy — and we build that into every frame.</p>
+      <p>tanmayxedits started as a solo editing project and evolved into a full content creation team. We shoot, edit, design and strategize, all under one roof.</p>
+      <p>We don't just make content. We study what makes people stop scrolling, what makes them share, and what makes them buy, and we build that into every frame.</p>
       <div class="about-stats stagger">
-        <div class="astat"><div class="astat-num">150+</div><div class="astat-label">Projects Done</div></div>
-        <div class="astat"><div class="astat-num">4+</div><div class="astat-label">Years Active</div></div>
+        <div class="astat"><div class="astat-num">1000+</div><div class="astat-label">Projects Done</div></div>
+        <div class="astat"><div class="astat-num">3+</div><div class="astat-label">Years Active</div></div>
         <div class="astat"><div class="astat-num">98%</div><div class="astat-label">Client Retention</div></div>
       </div>
-      <div class="team-row">
-        <div class="team-av">T</div><div class="team-av">K</div><div class="team-av">A</div>
-        <div class="team-av" style="background:rgba(255,255,255,.1);font-size:11px">+2</div>
-        <span class="team-label">Meet the team</span>
-      </div>
+
     </div>
   </div>
 </section>
@@ -1235,11 +1815,126 @@ footer{background:#000;position:relative;overflow:hidden;}
     <h2>Ready to go viral?</h2>
     <p>Let's build content that stops thumbs, builds audiences and turns viewers into buyers.</p>
     <div class="cta-btns">
-      <a href="/cdn-cgi/l/email-protection#1e767b7272715e6a7f70737f67667b7a776a6d307d7173" class="cta-btn-primary">Start a Project →</a>
+      <a href="#contact" class="cta-btn-primary">Start a Project →</a>
       <a href="#portfolio" class="cta-btn-ghost">View Our Work</a>
     </div>
   </div>
 </div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-section-inner">
+
+    <!-- LEFT -->
+    <div class="contact-section-info reveal">
+      <div class="contact-eyebrow">Get in touch</div>
+      <h2>Let's create something <span>great</span></h2>
+      <p class="contact-sub">Got a project in mind? Tell us what you need and we'll get back to you within 24 hours.</p>
+
+      <div class="contact-details stagger">
+        <a href="https://wa.me/919004731514" target="_blank" class="contact-detail-card">
+          <div class="detail-icon">💬</div>
+          <div class="detail-text">
+            <div class="detail-label">WhatsApp</div>
+            <div class="detail-value">+91 90047 31514</div>
+          </div>
+        </a>
+        <a href="mailto:tanmayutekar@gmail.com" class="contact-detail-card">
+          <div class="detail-icon">✉️</div>
+          <div class="detail-text">
+            <div class="detail-label">Email</div>
+            <div class="detail-value">tanmayutekar@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://instagram.com/tanmayxedits" target="_blank" class="contact-detail-card">
+          <div class="detail-icon">📸</div>
+          <div class="detail-text">
+            <div class="detail-label">Instagram</div>
+            <div class="detail-value">@tanmayxedits</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="contact-socials-row reveal">
+        <a href="https://instagram.com/tanmayxedits" target="_blank" class="cs-social-btn" title="Instagram">📸</a>
+        <a href="https://wa.me/919004731514" target="_blank" class="cs-social-btn" title="WhatsApp">💬</a>
+        <a href="mailto:tanmayutekar@gmail.com" class="cs-social-btn" title="Email">✉️</a>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="contact-form-box reveal">
+      <div id="cfWrap">
+        <div class="form-title">Send a message</div>
+        <div class="form-sub">Fill in the details and we'll reach out to discuss your project.</div>
+
+        <form id="cfForm" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="6dd9d7d7-8a50-48ca-85b3-aa6eb350600b"/>
+          <input type="hidden" name="subject" value="New Project Enquiry via tanmayxedits"/>
+          <input type="hidden" name="from_name" value="tanmayxedits Contact Form"/>
+          <input type="checkbox" name="botcheck" style="display:none"/>
+
+          <div class="cf-row">
+            <div class="cf-group">
+              <label class="cf-label">Your Name</label>
+              <input class="cf-input" type="text" name="name" placeholder="Rahul Sharma" required/>
+            </div>
+            <div class="cf-group">
+              <label class="cf-label">Phone / WhatsApp</label>
+              <input class="cf-input" type="tel" name="phone" placeholder="+91 98765 43210"/>
+            </div>
+          </div>
+
+          <div class="cf-group">
+            <label class="cf-label">Email Address</label>
+            <input class="cf-input" type="email" name="email" placeholder="you@example.com" required/>
+          </div>
+
+          <div class="cf-group">
+            <label class="cf-label">Service Needed</label>
+            <select class="cf-select" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Video Editing</option>
+              <option>Reel Editing</option>
+              <option>Event Reel Shooting</option>
+              <option>Videography</option>
+              <option>Motion Graphics</option>
+              <option>CGI / VFX</option>
+              <option>Multiple Services</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="cf-group">
+            <label class="cf-label">Budget Range</label>
+            <select class="cf-select" name="budget">
+              <option value="" disabled selected>Select a range</option>
+              <option>Under ₹5,000</option>
+              <option>₹5,000 - ₹15,000</option>
+              <option>₹15,000 - ₹30,000</option>
+              <option>₹30,000 - ₹60,000</option>
+              <option>₹60,000+</option>
+            </select>
+          </div>
+
+          <div class="cf-group">
+            <label class="cf-label">Tell us about your project</label>
+            <textarea class="cf-textarea" name="message" placeholder="What do you need? Any deadlines, references or details that help us understand your vision." required></textarea>
+          </div>
+
+          <button type="submit" class="cf-submit" id="cfSubmitBtn">Send Message</button>
+        </form>
+      </div>
+
+      <div class="cf-success" id="cfSuccess">
+        <div class="cf-success-icon">✅</div>
+        <div class="cf-success-title">Message sent!</div>
+        <div class="cf-success-sub">Thanks for reaching out. We'll get back to you within 24 hours.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -1249,7 +1944,7 @@ footer{background:#000;position:relative;overflow:hidden;}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#home" class="logo">tanmayx<span>edits</span></a>
+        <a href="index.html" class="logo">tanmayx<span>edits</span></a>
         <p>Content creation studio specialising in reels, motion graphics and social media growth.</p>
         <div class="footer-socials">
           <a href="https://instagram.com/tanmayxedits" target="_blank" class="footer-social-btn" title="Instagram">📸</a>
@@ -1262,11 +1957,11 @@ footer{background:#000;position:relative;overflow:hidden;}
         <a href="#portfolio">Portfolio</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="contact.html">Pricing</a>
+        <a href="contact.html">Contact</a>
       </div>
       <div class="footer-col">
         <h4>Services</h4>
-        <a href="404.html">Reel Editing</a>
+        <a href="404.html">Video Editing</a>
         <a href="404.html">Motion Graphics</a>
         <a href="404.html">Carousel Design</a>
         <a href="404.html">Digital Marketing</a>
@@ -1275,7 +1970,7 @@ footer{background:#000;position:relative;overflow:hidden;}
         <h4>Contact</h4>
         <a href="https://instagram.com/tanmayxedits" target="_blank">Instagram DM</a>
         <a href="https://wa.me/919004731514" target="_blank">WhatsApp</a>
-        <a href="/cdn-cgi/l/email-protection#dda9bcb3b0bca4a8a9b8b6bcaf9dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="7c081d12111d05090819171d0e3c1b111d1510521f1311">[email&#160;protected]</span></a>
+        <a href="mailto:tanmayutekar@gmail.com">tanmayutekar@gmail.com</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1475,59 +2170,300 @@ document.addEventListener('DOMContentLoaded',function(){
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach(el=>obs.observe(el));
 
-// Timeline scrubber
+
+
+// ── FILMSTRIP drag-to-scroll (smooth physics) ──
 (function(){
-  const track=document.getElementById('tlTrack'),handle=document.getElementById('tlHandle'),fill=document.getElementById('tlFill');
-  const dots=document.querySelectorAll('.tl-dot'),slider=document.getElementById('portSlider');
-  const total=dots.length;
-  let active=0,dragging=false,handlePct=0,velX=0,lastX=0,lastT=0,rafId=null;
-  function getRect(){return track.getBoundingClientRect()}
-  function pctFrom(cx){const r=getRect();return Math.max(0,Math.min(100,(cx-r.left)/r.width*100))}
-  function nearestIdx(p){return Math.round(p/100*(total-1))}
-  function slideToPanel(idx,anim){
-    slider.style.transition=anim?'transform .55s cubic-bezier(.22,1,.36,1)':'none';
-    slider.style.transform=`translateX(-${idx/total*100}%)`;
-    const panels=slider.querySelectorAll('.port-panel');
-    panels.forEach(p=>p.classList.remove('anim-enter'));
-    requestAnimationFrame(()=>requestAnimationFrame(()=>panels[idx].classList.add('anim-enter')));
+  const strip = document.getElementById('filmstrip');
+  const fill  = document.getElementById('fsProgressFill');
+  if(!strip) return;
+
+  // physics state
+  let isDown   = false;
+  let startX   = 0;
+  let startScroll = 0;
+  let curX     = 0;
+  let velX     = 0;       // px/ms
+  let lastX    = 0;
+  let lastT    = 0;
+  let targetScroll = 0;   // where we're lerping to
+  let currentScroll = 0;  // lerped position
+  let raf      = null;
+  let isDragging = false;
+
+  // sample velocity over a short window for stability
+  const VEL_SAMPLES = 5;
+  let velHistory = [];
+
+  function updateProgress(){
+    const max = strip.scrollWidth - strip.clientWidth;
+    const pct = max > 0 ? (currentScroll / max * 100) : 0;
+    if(fill) fill.style.width = pct.toFixed(1) + '%';
   }
-  function applyPct(p,anim){
-    handlePct=Math.max(0,Math.min(100,p));
-    handle.style.transition=anim?'left .4s cubic-bezier(.22,1,.36,1)':'none';
-    fill.style.transition=anim?'width .4s cubic-bezier(.22,1,.36,1)':'none';
-    handle.style.left=handlePct+'%';fill.style.width=handlePct+'%';
-    const idx=nearestIdx(handlePct);
-    if(idx!==active)setActive(idx,anim);
+
+  function lerp(a, b, t){ return a + (b - a) * t; }
+
+  function loop(){
+    if(isDragging){
+      // while dragging: lerp scroll position for buttery feel
+      currentScroll = lerp(currentScroll, targetScroll, 0.18);
+      strip.scrollLeft = currentScroll;
+      updateProgress();
+      raf = requestAnimationFrame(loop);
+    } else {
+      // after release: momentum with smooth friction
+      if(Math.abs(velX) > 0.1){
+        targetScroll += velX * 16;  // convert px/ms → px/frame approx
+        // clamp to bounds
+        const max = strip.scrollWidth - strip.clientWidth;
+        targetScroll = Math.max(0, Math.min(max, targetScroll));
+        velX *= 0.94;               // smooth friction — higher = longer glide
+        currentScroll = lerp(currentScroll, targetScroll, 0.12);
+        strip.scrollLeft = currentScroll;
+        updateProgress();
+        raf = requestAnimationFrame(loop);
+      } else {
+        velX = 0;
+        raf = null;
+      }
+    }
   }
-  function setActive(idx,anim){
-    active=idx;
-    dots.forEach((d,i)=>{d.classList.toggle('active',i===idx);d.classList.toggle('passed',i<idx)});
-    slideToPanel(idx,anim!==false);
+
+  // ── MOUSE ──
+  strip.addEventListener('mousedown', e => {
+    e.preventDefault();
+    isDown = true;
+    isDragging = true;
+    strip.classList.add('dragging');
+    startX = e.clientX;
+    startScroll = currentScroll;
+    velX = 0;
+    velHistory = [];
+    lastX = e.clientX;
+    lastT = performance.now();
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(loop);
+  });
+
+  window.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    const now = performance.now();
+    const dt  = now - lastT;
+    if(dt > 0){
+      const v = (e.clientX - lastX) / dt;
+      velHistory.push(v);
+      if(velHistory.length > VEL_SAMPLES) velHistory.shift();
+      // weighted average — recent samples count more
+      velX = velHistory.reduce((s,v,i) => s + v*(i+1), 0)
+           / velHistory.reduce((s,_,i) => s + (i+1), 0);
+    }
+    lastX = e.clientX;
+    lastT = now;
+    const delta = e.clientX - startX;
+    targetScroll = startScroll - delta;
+    // clamp
+    const max = strip.scrollWidth - strip.clientWidth;
+    targetScroll = Math.max(0, Math.min(max, targetScroll));
+  });
+
+  window.addEventListener('mouseup', () => {
+    if(!isDown) return;
+    isDown = false;
+    isDragging = false;
+    strip.classList.remove('dragging');
+    // negate: dragging right = negative vel = scroll left
+    velX = -velX;
+  });
+
+  // ── TOUCH ──
+  let touchStartX = 0, touchStartScroll = 0;
+  strip.addEventListener('touchstart', e => {
+    isDragging = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartScroll = currentScroll;
+    velX = 0;
+    velHistory = [];
+    lastX = touchStartX;
+    lastT = performance.now();
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(loop);
+  }, {passive:true});
+
+  strip.addEventListener('touchmove', e => {
+    const now = performance.now();
+    const dt  = now - lastT;
+    const tx  = e.touches[0].clientX;
+    if(dt > 0){
+      const v = (tx - lastX) / dt;
+      velHistory.push(v);
+      if(velHistory.length > VEL_SAMPLES) velHistory.shift();
+      velX = velHistory.reduce((s,v,i) => s + v*(i+1), 0)
+           / velHistory.reduce((s,_,i) => s + (i+1), 0);
+    }
+    lastX = tx;
+    lastT = now;
+    const delta = tx - touchStartX;
+    targetScroll = touchStartScroll - delta;
+    const max = strip.scrollWidth - strip.clientWidth;
+    targetScroll = Math.max(0, Math.min(max, targetScroll));
+  }, {passive:true});
+
+  strip.addEventListener('touchend', () => {
+    isDragging = false;
+    velX = -velX;
+  });
+
+  // init
+  currentScroll = strip.scrollLeft;
+  targetScroll  = currentScroll;
+  updateProgress();
+})();
+
+// ── LASER SWEEP ──
+(function(){
+  const hint  = document.getElementById('laserHint');
+  const laser = document.getElementById('laserBeam');
+  const trail = document.getElementById('laserTrail');
+  const cards = hint ? hint.querySelectorAll('.lh-card') : [];
+  const strip = document.getElementById('filmstrip');
+  if(!hint || !laser || !strip) return;
+
+  const CARD_W   = 28;
+  const GAP      = 5;
+  const N        = cards.length;
+  const TOTAL_W  = N * CARD_W + (N - 1) * GAP;
+  const DURATION = 2000;   // sweep duration ms
+  const PAUSE    = 900;    // hold at end before restart
+  const RETURN   = 320;    // fast snap back duration
+
+  let startTime  = null;
+  let raf        = null;
+  let stopped    = false;
+  let returning  = false;
+  let returnFrom = 0;
+  let returnStart= 0;
+  let lastX      = 0;
+  let litIndex   = -1;
+
+  // cubic ease in-out
+  function easeInOut(t){ return t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; }
+  // ease out quart for fast return
+  function easeOutQuart(t){ return 1-Math.pow(1-t,4); }
+
+  function setBeam(x){
+    laser.style.transform = `translateX(${x}px)`;
+    if(trail) trail.style.width = Math.max(0,x) + 'px';
+    lastX = x;
+
+    // light up card under beam + glitch
+    let newLit = -1;
+    cards.forEach((c,i) => {
+      const s = i*(CARD_W+GAP), e = s+CARD_W;
+      const isLit = x >= s-2 && x <= e+2;
+      if(isLit) newLit = i;
+      if(isLit && !c.classList.contains('lit')){
+        c.classList.add('lit');
+        // glitch flicker on entry
+        c.classList.add('glitch');
+        setTimeout(()=> c.classList.remove('glitch'), 130);
+      } else if(!isLit){
+        c.classList.remove('lit');
+      }
+    });
+    litIndex = newLit;
   }
-  function momentumLoop(){
-    if(Math.abs(velX)<0.01){velX=0;return}
-    velX*=0.88;const r=getRect();
-    handlePct=Math.max(0,Math.min(100,handlePct+velX/r.width*100));
-    handle.style.transition='none';fill.style.transition='none';
-    handle.style.left=handlePct+'%';fill.style.width=handlePct+'%';
-    const idx=nearestIdx(handlePct);if(idx!==active)setActive(idx,true);
-    rafId=requestAnimationFrame(momentumLoop);
+
+  function sweep(ts){
+    if(stopped) return;
+    if(!startTime) startTime = ts;
+    const elapsed = ts - startTime;
+    const cycle   = DURATION + PAUSE;
+    const t       = elapsed % cycle;
+
+    if(returning){
+      const rt = (ts - returnStart) / RETURN;
+      if(rt >= 1){
+        returning = false;
+        startTime = ts;
+        setBeam(0);
+      } else {
+        const x = returnFrom * (1 - easeOutQuart(rt));
+        setBeam(x);
+      }
+    } else if(t <= DURATION){
+      const x = easeInOut(t / DURATION) * (TOTAL_W - 2);
+      setBeam(x);
+    } else {
+      // pause at end — hold beam right
+      setBeam(TOTAL_W - 2);
+      if(t >= cycle - 10){
+        // snap back fast
+        returning  = true;
+        returnFrom = lastX;
+        returnStart = ts;
+        cards.forEach(c => c.classList.remove('lit'));
+        startTime = null;
+      }
+    }
+    raf = requestAnimationFrame(sweep);
   }
-  function snap(){cancelAnimationFrame(rafId);const t=nearestIdx(handlePct)/(total-1)*100;applyPct(t,true);setActive(nearestIdx(t),true)}
-  function onDown(cx){dragging=true;handle.classList.add('dragging');cancelAnimationFrame(rafId);velX=0;lastX=cx;lastT=Date.now();applyPct(pctFrom(cx),false)}
-  function onMove(cx){if(!dragging)return;const now=Date.now(),dt=Math.max(1,now-lastT);velX=(cx-lastX)/dt*16;lastX=cx;lastT=now;applyPct(pctFrom(cx),false)}
-  function onUp(){if(!dragging)return;dragging=false;handle.classList.remove('dragging');Math.abs(velX)>1.5?(rafId=requestAnimationFrame(momentumLoop),setTimeout(snap,300)):snap()}
-  handle.addEventListener('mousedown',e=>{onDown(e.clientX);e.preventDefault()});
-  track.addEventListener('mousedown',e=>{onDown(e.clientX);e.preventDefault()});
-  window.addEventListener('mousemove',e=>onMove(e.clientX));
-  window.addEventListener('mouseup',onUp);
-  handle.addEventListener('touchstart',e=>onDown(e.touches[0].clientX),{passive:true});
-  track.addEventListener('touchstart',e=>onDown(e.touches[0].clientX),{passive:true});
-  window.addEventListener('touchmove',e=>onMove(e.touches[0].clientX),{passive:true});
-  window.addEventListener('touchend',onUp);
-  dots.forEach((d,i)=>d.addEventListener('click',()=>{applyPct(i/(total-1)*100,true);setActive(i,true)}));
-  applyPct(0,false);setActive(0,false);slideToPanel(0,false);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>slider.querySelectorAll('.port-panel')[0].classList.add('anim-enter')));
+
+  raf = requestAnimationFrame(sweep);
+
+  function onDragStart(){
+    stopped = true;
+    returning = false;
+    cancelAnimationFrame(raf);
+    cards.forEach(c => c.classList.remove('lit','glitch'));
+    hint.classList.add('active');
+    hint.classList.add('hidden');
+  }
+
+  function onDragEnd(){
+    setTimeout(()=>{
+      hint.classList.remove('hidden','active');
+      stopped    = false;
+      returning  = false;
+      startTime  = null;
+      setBeam(0);
+      raf = requestAnimationFrame(sweep);
+    }, 1600);
+  }
+
+  strip.addEventListener('mousedown',  onDragStart);
+  strip.addEventListener('touchstart', onDragStart, {passive:true});
+  window.addEventListener('mouseup',   onDragEnd);
+  strip.addEventListener('touchend',   onDragEnd,   {passive:true});
+})();
+
+(function(){
+  const lb      = document.getElementById('lightbox');
+  const lbFrame = document.getElementById('lbFrame');
+  const lbClose = document.getElementById('lbClose');
+  const lbTag   = document.getElementById('lbTag');
+  const lbTitle = document.getElementById('lbTitle');
+  if(!lb) return;
+
+  document.querySelectorAll('.fs-card:not(.fs-soon)').forEach(card => {
+    card.addEventListener('click', () => {
+      const driveId = card.dataset.drive;
+      if(!driveId) return;
+      lbFrame.src = `https://drive.google.com/file/d/${driveId}/preview`;
+      lbTag.textContent   = card.dataset.tag   || '';
+      lbTitle.textContent = card.dataset.title || '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLb(){
+    lb.classList.remove('open');
+    lbFrame.src = '';
+    document.body.style.overflow = '';
+  }
+  lbClose.addEventListener('click', closeLb);
+  lb.addEventListener('click', e => { if(e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
 })();
 
 // Services mouse spotlight
@@ -1745,7 +2681,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <!-- ═══ SEO CONTENT (invisible to users, readable by search engines) ═══ -->
 <div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;left:-9999px;top:-9999px;">
-  <h1>Tanmay Utekar — Video Editor &amp; VFX Artist</h1>
+  <h1>Tanmay Utekar | Video Editor &amp; VFX Artist</h1>
   <p>
     Tanmay Utekar is a professional video editor and VFX artist based in India. 
     Operating under the brand tanmayxedits, Tanmay specialises in creating cinematic reels, 
@@ -1764,6 +2700,35 @@ tanmayxedits video editing studio
 </div>
 
 <div class="cursor-head" id="cursorHead"></div>
+
+<!-- CONTACT FORM JS -->
+<script>
+(function(){
+  const form    = document.getElementById('cfForm');
+  const btn     = document.getElementById('cfSubmitBtn');
+  const wrap    = document.getElementById('cfWrap');
+  const success = document.getElementById('cfSuccess');
+  if(!form) return;
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    btn.textContent = 'Sending...';
+    btn.style.opacity = '.6';
+    btn.disabled = true;
+    try{
+      const res  = await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)});
+      const data = await res.json();
+      if(data.success){
+        wrap.style.display='none';
+        success.classList.add('show');
+      } else { throw new Error(); }
+    } catch(err){
+      btn.textContent = 'Something went wrong. Try again.';
+      btn.style.opacity='1';
+      btn.disabled=false;
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
