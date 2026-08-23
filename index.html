@@ -1757,7 +1757,7 @@ footer{background:#000;position:relative;overflow:hidden;}
 <div class="lightbox" id="lightbox">
   <div class="lb-inner" id="lbInner">
     <div class="lb-close" id="lbClose">✕</div>
-    <iframe id="lbFrame" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <iframe id="lbFrame" src="" allow="autoplay; fullscreen; encrypted-media" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
     <div class="lb-info">
       <div class="lb-tag" id="lbTag"></div>
       <div class="lb-title" id="lbTitle"></div>
@@ -2606,7 +2606,7 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach
     card.addEventListener('click', () => {
       const driveId = card.dataset.drive;
       if(!driveId) return;
-      lbFrame.src = `https://drive.google.com/file/d/${driveId}/preview`;
+      lbFrame.src = `https://drive.google.com/file/d/${driveId}/preview?usp=sharing`;
       lbTag.textContent   = card.dataset.tag   || '';
       lbTitle.textContent = card.dataset.title || '';
       lb.classList.add('open');
